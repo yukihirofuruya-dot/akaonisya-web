@@ -1,0 +1,507 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>赤鬼ハウス-ともしび-｜群馬・鬼石の移住者向けシェアハウス</title>
+<meta name="description" content="群馬県藤岡市鬼石のシェアハウス「赤鬼ハウス-ともしび-」。ひと月のお試し入居から、鬼石での暮らしを確かめられます。運営：労働者協同組合 赤鬼社">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="労働者協同組合 赤鬼社">
+<meta property="og:title" content="赤鬼ハウス-ともしび-｜群馬・鬼石の移住者向けシェアハウス">
+<meta property="og:description" content="群馬県藤岡市鬼石のシェアハウス「赤鬼ハウス-ともしび-」。ひと月のお試し入居から、鬼石での暮らしを確かめられます。運営：労働者協同組合 赤鬼社">
+<meta property="og:url" content="http://akaonisya.jp/house/">
+<meta property="og:image" content="http://akaonisya.jp/house/img/ogp-house.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@400;600&display=swap" rel="stylesheet">
+
+<!--
+  写真の差し替え・追加
+  各部屋の写真は <div class="room-photos"> の中にあります。
+  main の <img> と、thumbs の <button> を1枚ずつ足せば切り替えに加わります。
+  まだ写真のない部屋は「写真：〇〇」の枠が出ています。
+-->
+
+<style>
+:root{
+  --paper:#f1f2ee;
+  --ink:#1e2622;
+  --ink-soft:#54615a;
+  --stone:#35473e;
+  --stone-deep:#222e28;
+  --vein:#d6dcd3;
+  --aka:#ab3527;
+  --lamp:#c4913f;
+  --on-stone:#eef1ea;
+  --on-stone-soft:#c3cdc3;
+  --shot-bg:#e3e7df;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#151a17; --ink:#e7ebe5; --ink-soft:#9daba2;
+    --stone:#26332c; --stone-deep:#1a231e; --vein:#2d3a33;
+    --aka:#d0604e; --lamp:#dcac5c; --on-stone:#e7ebe5; --on-stone-soft:#b3beb4; --shot-bg:#1e2722;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#151a17; --ink:#e7ebe5; --ink-soft:#9daba2;
+  --stone:#26332c; --stone-deep:#1a231e; --vein:#2d3a33;
+  --aka:#d0604e; --lamp:#dcac5c; --on-stone:#e7ebe5; --on-stone-soft:#b3beb4; --shot-bg:#1e2722;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:"Noto Sans JP","Hiragino Sans","Yu Gothic",system-ui,sans-serif;
+  font-size:16px;
+  line-height:1.85;
+  font-feature-settings:"palt" 1;
+}
+h1,h2,h3{
+  font-family:"Noto Serif JP","Hiragino Mincho ProN","Yu Mincho",serif;
+  font-weight:600;
+  line-height:1.5;
+  margin:0;
+  text-wrap:balance;
+}
+p{margin:0 0 1.1em}
+a{color:inherit}
+img{max-width:100%;display:block}
+
+.wrap{width:min(100% - 2rem, 46rem);margin-inline:auto}
+.wrap-wide{width:min(100% - 2rem, 60rem);margin-inline:auto}
+section{padding-block:3.6rem}
+.rule{height:1px;background:var(--vein);border:0;margin:0}
+
+/* ---------- 写真 ---------- */
+figure{margin:0}
+.ph{width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;background:var(--shot-bg)}
+.ph.tall{aspect-ratio:2/3}
+figcaption{font-size:.8rem;color:var(--ink-soft);margin-top:.4rem;line-height:1.6}
+.shot{
+  background:var(--shot-bg);
+  border:1px dashed var(--vein);
+  aspect-ratio:3/2;max-width:100%;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--ink-soft);font-size:.85rem;text-align:center;padding:1rem;
+}
+
+/* ---------- hero ---------- */
+.hero{
+  background:var(--stone-deep);
+  color:var(--on-stone);
+  padding-block:4.2rem 0;
+}
+.kanban{font-size:.82rem;letter-spacing:.14em;color:var(--lamp);margin:0 0 1.6rem}
+.hero h1{font-size:clamp(2.05rem,7.6vw,3.35rem);letter-spacing:.02em;margin:0 0 1.4rem}
+.hero .lead{font-size:1.02rem;color:var(--on-stone-soft);max-width:30rem;margin:0 0 2.2rem}
+.hero-photo{margin-top:2.8rem}
+.hero-photo .ph{aspect-ratio:16/9}
+
+.btn{
+  display:inline-block;
+  background:var(--aka);color:#fff;text-decoration:none;
+  padding:.95rem 1.7rem;border-radius:2px;
+  font-weight:700;font-size:1rem;
+}
+.btn:hover{filter:brightness(1.08)}
+.btn:focus-visible,a:focus-visible,button:focus-visible{outline:2px solid var(--lamp);outline-offset:3px}
+.btn-note{display:block;font-size:.85rem;color:var(--on-stone-soft);margin-top:.7rem}
+
+/* ---------- 見出し ---------- */
+h2{font-size:clamp(1.45rem,4.6vw,1.9rem);margin:0 0 1.5rem}
+.sub{color:var(--ink-soft);font-size:.95rem}
+
+/* ---------- 3つの段階 ---------- */
+.steps{list-style:none;margin:0;padding:0;counter-reset:s}
+.steps li{
+  counter-increment:s;
+  display:grid;grid-template-columns:2.4rem 1fr;gap:1rem;
+  padding-block:1.5rem;border-top:1px solid var(--vein);
+}
+.steps li:last-child{border-bottom:1px solid var(--vein)}
+.steps li::before{content:counter(s);font-family:"Noto Serif JP",serif;font-size:1.5rem;color:var(--lamp);line-height:1.3}
+.steps h3{font-size:1.12rem;margin:0 0 .3rem}
+.steps p{margin:0;font-size:.95rem;color:var(--ink-soft)}
+.price{color:var(--ink);font-weight:700}
+
+/* ---------- 部屋 ---------- */
+.tabs{display:flex;flex-wrap:wrap;gap:.5rem;margin:0 0 1.6rem}
+.tab{
+  font:inherit;font-size:.9rem;
+  background:transparent;color:var(--ink-soft);
+  border:1px solid var(--vein);border-radius:2px;
+  padding:.5rem .9rem;cursor:pointer;
+}
+.tab[aria-selected="true"]{background:var(--stone);color:var(--on-stone);border-color:var(--stone)}
+.room h3{font-size:1.25rem;margin:1.3rem 0 .2rem}
+.room .meta{display:flex;flex-wrap:wrap;gap:.4rem 1.2rem;font-size:.9rem;color:var(--ink-soft);margin:0 0 .9rem}
+.meta b{color:var(--ink);font-size:1.05rem}
+.tag{display:inline-block;font-size:.78rem;padding:.15rem .6rem;border:1px solid var(--vein);border-radius:2px;color:var(--ink-soft)}
+.tag.open{border-color:var(--aka);color:var(--aka)}
+.room p{font-size:.95rem;margin:0 0 .6rem}
+
+.thumbs{display:flex;gap:.5rem;margin-top:.6rem;flex-wrap:wrap}
+.thumb{
+  padding:0;border:2px solid transparent;background:none;cursor:pointer;
+  width:5.2rem;border-radius:2px;
+}
+.thumb img{aspect-ratio:3/2;object-fit:cover;width:100%;opacity:.6}
+.thumb[aria-pressed="true"]{border-color:var(--lamp)}
+.thumb[aria-pressed="true"] img,.thumb:hover img{opacity:1}
+
+/* ---------- 共用部 ---------- */
+.gallery{display:grid;gap:.9rem 1rem;margin-top:1rem}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+@media (max-width:40rem){
+  .g4{grid-template-columns:repeat(2,1fr)}
+  .g2.stack-sm{grid-template-columns:1fr}
+}
+.lead-photo{margin-top:.2rem}
+.facts{list-style:none;margin:2rem 0 0;padding:0}
+.facts li{
+  padding-block:.75rem;border-top:1px solid var(--vein);
+  display:grid;grid-template-columns:7.5rem 1fr;gap:1rem;font-size:.95rem;
+}
+.facts li:last-child{border-bottom:1px solid var(--vein)}
+.facts .k{color:var(--ink-soft)}
+
+/* ---------- 町 ---------- */
+.town{background:var(--stone);color:var(--on-stone)}
+.town h2{color:var(--on-stone)}
+.town p{color:var(--on-stone-soft)}
+.town figcaption{color:var(--on-stone-soft)}
+
+/* ---------- 運営者 ---------- */
+.host{display:grid;gap:1.4rem}
+@media(min-width:44rem){
+  .host{grid-template-columns:12rem 1fr;align-items:start}
+  .host .shot{aspect-ratio:1}
+}
+
+/* ---------- FAQ ---------- */
+details{border-top:1px solid var(--vein);padding-block:.9rem}
+details:last-of-type{border-bottom:1px solid var(--vein)}
+summary{cursor:pointer;font-weight:500;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"＋";color:var(--lamp);margin-right:.6rem}
+details[open] summary::before{content:"−"}
+details p{margin:.7rem 0 0;font-size:.94rem;color:var(--ink-soft)}
+
+/* ---------- CTA ---------- */
+.cta{background:var(--stone-deep);color:var(--on-stone)}
+.cta h2{color:var(--on-stone)}
+.cta p{color:var(--on-stone-soft)}
+.contact{margin:1.6rem 0 0;font-size:1rem;line-height:2}
+.contact a{color:var(--lamp)}
+
+footer{padding-block:2.2rem 3rem;font-size:.84rem;color:var(--ink-soft)}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="kanban">群馬県藤岡市鬼石　赤鬼ハウス-ともしび-</p>
+    <h1>地域とつながる<br>シェアハウス。</h1>
+    <p class="lead">鬼石への移住を応援するシェアハウスです。ひと月のお試し入居から始めることもできます。この家を拠点に地域とのつながりをつくり、住まいや仕事を見つけていけます。</p>
+    <p>
+      <a class="btn" href="#contact">お試し入居について聞く</a>
+      <span class="btn-note">ひと月3万円。光熱費とWi-Fi込み</span>
+    </p>
+  </div>
+  <div class="wrap-wide hero-photo">
+    <img class="ph" src="img/exterior.jpg" alt="赤鬼ハウスの外観。木造二階建てで、2階に長いバルコニー" width="1400" height="933">
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <h2>試す、住む</h2>
+    <p class="sub">ひと月暮らしてみる、そのまま住み続ける。状況に合わせて選べます。はじめから入居することもできます。</p>
+    <ol class="steps">
+      <li>
+        <div>
+          <h3>お試し入居（ひと月）</h3>
+          <p>実際に暮らしてみることで、鬼石に移り住んだらどんな毎日になるのかを確かめられます。「移住したら、こんなふうに暮らせるんだ」と、自分の目で感じられるひと月です。<span class="price">ひと月3万円、光熱費込み。</span></p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <h3>本入居</h3>
+          <p>気に入ったら、そのまま住み続けられます。<span class="price">月3万〜5万円、光熱費込み。</span></p>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section>
+  <div class="wrap">
+    <h2>この家に住むと</h2>
+    <ul class="facts">
+      <li><span class="k">学校の前</span><span>家のすぐ前が鬼石小学校。人の目がある通りなので、安心して暮らせます。</span></li>
+      <li><span class="k">駐車場</span><span>近くに100台ほど止められる無料駐車場があります。家族や友人が訪ねてきても、車の置き場所に困りません。</span></li>
+      <li><span class="k">庭</span><span>家庭菜園ができる庭があります。季節の野菜づくりを楽しめます。</span></li>
+      <li><span class="k">畑</span><span>近くに借りられる農園もあります。本格的に育てたくなったら、そちらも使えます。</span></li>
+      <li><span class="k">夏祭り</span><span>伝統ある鬼石夏祭りに、住民として参加できます。お囃子に加わり、子どもから大人まで、町の人たちと一つになって楽しめます。</span></li>
+    </ul>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section>
+  <div class="wrap">
+    <h2>空いている部屋</h2>
+    <p class="sub">2階の3部屋です。家賃には光熱費とWi-Fiが入っています。</p>
+
+    <div class="tabs" role="tablist" aria-label="部屋を選ぶ">
+      <button class="tab" role="tab" aria-selected="true" aria-controls="r1" id="t1">南角の和室</button>
+      <button class="tab" role="tab" aria-selected="false" aria-controls="r2" id="t2">南の12畳</button>
+      <button class="tab" role="tab" aria-selected="false" aria-controls="r3" id="t3">北の6畳</button>
+    </div>
+
+    <article class="room" id="r1" role="tabpanel" aria-labelledby="t1">
+      <figure>
+        <img class="ph" src="img/kado-a.jpg" alt="2階南角の和室。畳敷きで、バルコニーに面した窓と丸窓の欄間" width="1400" height="933" loading="lazy">
+        <figcaption>窓の外はバルコニー。</figcaption>
+      </figure>
+      <h3>南角の和室 <span class="tag open">空き</span></h3>
+      <p class="meta"><span><b>月40,000円</b>（光熱費込み）</span><span>17.2㎡</span><span>南向き</span></p>
+      <p>南のバルコニー側と横に窓がある、この家でいちばん明るい部屋です。天井の近くに丸窓の欄間が三つ並んでいます。</p>
+      <p>お試し入居もこの部屋で受け付けています。気に入れば、部屋を移らずにそのまま住み続けられます。</p>
+    </article>
+
+    <article class="room" id="r2" role="tabpanel" aria-labelledby="t2" hidden>
+      <div class="room-photos">
+        <figure>
+          <img class="ph main" src="img/r12-a.jpg" alt="2階南側12畳。杉の床に座卓と丸テーブル、窓の外に山" width="1400" height="933" loading="lazy">
+          <figcaption class="cap">奥の間。</figcaption>
+        </figure>
+        <div class="thumbs" aria-label="12畳の写真を選ぶ">
+          <button class="thumb" type="button" aria-pressed="true" data-src="img/r12-a.jpg" data-alt="2階南側12畳。杉の床に座卓と丸テーブル、窓の外に山" data-cap="奥の間。"><img src="img/r12-a.jpg" alt="" loading="lazy"></button>
+          <button class="thumb" type="button" aria-pressed="false" data-src="img/r12-b.jpg" data-alt="欄間の彫り物がある二間続きの12畳" data-cap="手前の間から。上が欄間の彫り物。"><img src="img/r12-b.jpg" alt="" loading="lazy"></button>
+          <button class="thumb" type="button" aria-pressed="false" data-src="img/r12-view.jpg" data-alt="12畳の窓から見える木々と小学校、背後の山" data-cap="窓から。木の向こうが鬼石小学校。"><img src="img/r12-view.jpg" alt="" loading="lazy"></button>
+        </div>
+      </div>
+      <h3>南の12畳 <span class="tag open">空き</span></h3>
+      <p class="meta"><span><b>月50,000円</b>（光熱費込み）</span><span>37.85㎡</span><span>エアコンあり</span></p>
+      <p>二間続きの、この家でいちばん広い部屋です。床は杉板。境の欄間には竹の彫り物が残っています。窓からは小学校と、その向こうの山が見えます。</p>
+      <p>ふたりで住むのにちょうどいい広さです。</p>
+    </article>
+
+    <article class="room" id="r3" role="tabpanel" aria-labelledby="t3" hidden>
+      <figure>
+        <img class="ph" src="img/kita-a.jpg" alt="2階北側6畳。畳にラグ、壁一面の収納、小窓" width="1400" height="933" loading="lazy">
+        <figcaption>左の壁が全部収納。</figcaption>
+      </figure>
+      <h3>北の6畳 <span class="tag open">空き</span></h3>
+      <p class="meta"><span><b>月30,000円</b>（光熱費込み）</span><span>10.2㎡</span><span>壁一面が収納</span></p>
+      <p>いちばん小さくて、いちばん手ごろな部屋です。壁一面が収納なので、荷物は見た目より入ります。</p>
+      <p>エアコンは来年の夏までにつけます。この冬はファンヒーターです。</p>
+    </article>
+
+  </div>
+</section>
+
+<hr class="rule">
+
+<section>
+  <div class="wrap">
+    <h2>みんなで使うところ</h2>
+    <figure class="lead-photo">
+      <img class="ph" src="img/living.jpg" alt="1階リビング。杉の床、革のソファ、提灯のような照明、庭に面した窓" width="1400" height="933" loading="lazy">
+      <figcaption>1階のリビング。窓の外が庭です。</figcaption>
+    </figure>
+
+    <div class="gallery g2">
+      <figure>
+        <img class="ph" src="img/living-2.jpg" alt="リビングからダイニングキッチンの方向を見たところ" width="1400" height="933" loading="lazy">
+        <figcaption>リビングの反対側。引き戸の先が台所です。</figcaption>
+      </figure>
+      <figure>
+        <img class="ph" src="img/living-meal.jpg" alt="リビングの座卓を囲んでごはんを食べているところ" width="1400" height="933" loading="lazy">
+        <figcaption>ごはんは、だいたいこの座卓で。</figcaption>
+      </figure>
+      <figure>
+        <img class="ph" src="img/kitchen.jpg" alt="ダイニングキッチン。ガスコンロ、冷蔵庫、食器棚、作業台" width="1400" height="933" loading="lazy">
+        <figcaption>ダイニングキッチン。</figcaption>
+      </figure>
+      <figure>
+        <img class="ph" src="img/entrance.jpg" alt="階段の上から見下ろした玄関" width="1400" height="933" loading="lazy">
+        <figcaption>玄関。階段の上から。</figcaption>
+      </figure>
+      <figure>
+        <img class="ph" src="img/telework.jpg" alt="仕事部屋に置いた、囲いのある一人掛けソファ" width="1400" height="933" loading="lazy">
+        <figcaption>2階の仕事部屋。オンライン会議にも使えます。</figcaption>
+      </figure>
+      <figure>
+        <img class="ph" src="img/smartball.jpg" alt="灯りのついた手作りのスマートボール台" width="1400" height="933" loading="lazy">
+        <figcaption>リビングの隅にある、手づくりのスマートボール台。</figcaption>
+      </figure>
+    </div>
+
+    <div class="gallery g4">
+      <figure>
+        <img class="ph tall" src="img/bath.jpg" alt="浴室の浴槽" width="933" height="1400" loading="lazy">
+        <figcaption>浴室</figcaption>
+      </figure>
+      <figure>
+        <img class="ph tall" src="img/washbasin.jpg" alt="洗面台" width="933" height="1400" loading="lazy">
+        <figcaption>洗面台</figcaption>
+      </figure>
+      <figure>
+        <img class="ph tall" src="img/toilet.jpg" alt="温水洗浄便座つきのトイレ" width="933" height="1400" loading="lazy">
+        <figcaption>トイレ</figcaption>
+      </figure>
+      <figure>
+        <img class="ph tall" src="img/laundry.jpg" alt="洗濯機と、その上の衣類乾燥機" width="933" height="1400" loading="lazy">
+        <figcaption>洗濯機と乾燥機</figcaption>
+      </figure>
+    </div>
+
+    <ul class="facts">
+      <li><span class="k">リビング</span><span>21.3㎡。住人が自然と集まる場所です。</span></li>
+      <li><span class="k">台所</span><span>15.6㎡のダイニングキッチン。ガスコンロ。</span></li>
+      <li><span class="k">風呂・トイレ</span><span>1階に共用。</span></li>
+      <li><span class="k">洗濯</span><span>洗濯機と衣類乾燥機があります。</span></li>
+      <li><span class="k">Wi-Fi</span><span>あり。家賃に含まれます。</span></li>
+      <li><span class="k">仕事部屋</span><span>2階の4.5畳。オンライン会議や、ひとりで集中したいときに使えます。</span></li>
+      <li><span class="k">決めごと</span><span>全館禁煙、ペット不可。21時から6時は「おやすみタイム」。決まりはそのくらいです。</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="town">
+  <div class="wrap">
+    <h2>鬼石のこと</h2>
+    <p>鬼石は、群馬県の南、埼玉県との県境にある町です。まわりを山に囲まれ、町のそばを神流川が流れています。</p>
+    <p>暮らしのすぐそばに自然があります。湧き水を汲みに行けば、おいしい水がいつでも手に入ります。災害が少なく、台風の被害も受けにくい土地です。群馬名物の空っ風もあまり吹かず、風の穏やかな町です。</p>
+    <p>そして夏には、伝統ある鬼石夏祭りがあります。人口は減っていますが、町を盛り上げようとする人たちがいまも根づいていて、祭りの日には子どもから大人までが一つになります。</p>
+    <p>新しく移り住んだ人たちも動きはじめています。町を元気にしようと、移住者が立ち上げたのが労働者協同組合 赤鬼社。この家も、赤鬼社が運営しています。</p>
+    <div class="lead-photo">
+      <figure>
+        <img class="ph" src="img/garden.jpg" alt="縁側から見た庭。流木のオブジェの向こうに小学校の校舎" width="1400" height="933" loading="lazy">
+        <figcaption>縁側から見た庭。</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>やっている人</h2>
+    <div class="host">
+      <img class="ph" src="img/furuya.jpg" alt="古谷如弘。紺の作務衣に白い帽子で、木立の前に立って笑っている" width="800" height="800" style="aspect-ratio:1" loading="lazy">
+      <div>
+        <p>古谷如弘（ふるや ゆきひろ）。労働者協同組合 赤鬼社 代表理事。</p>
+        <p>高校生のころ映画やドラマに憧れて東京へ出て、テレビドラマの制作からWeb動画のディレクションまで、15年ほど映像の仕事をしてきました。4年前、もともと縁のあった鬼石に家族で移り住みました。</p>
+        <p>この土地に暮らし、地域の人たちとつながったことで、毎日はとても豊かになりました。だからこそ、これから来る人にも、この地域を開いていきたい。新しく来た人が地域とつながり、自分の生きたい生き方をここで実現できるように。赤鬼ハウスは、そのための家です。</p>
+        <p>いまも映像の仕事を続けながら、この家と町の行事の運営に取り組んでいます。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section>
+  <div class="wrap">
+    <h2>よくある質問</h2>
+    <details>
+      <summary>お試し入居のあと、必ず住まないといけませんか？</summary>
+      <p>いいえ。ひと月で区切っても大丈夫です。</p>
+    </details>
+    <details>
+      <summary>お試し入居のあと、そのまま住み続けられますか？</summary>
+      <p>はい。気に入ったら、そのまま本入居に切り替えられます。部屋を移る必要もありません。</p>
+    </details>
+    <details>
+      <summary>夫婦・ふたりで入居できますか？</summary>
+      <p>できます。部屋は南角または12畳になります。料金は人数で変わるので、ご相談ください。</p>
+    </details>
+    <details>
+      <summary>子どもと一緒に住めますか？</summary>
+      <p>いまは、ひとり・ふたりでの暮らしを想定しています。家族での移住を考えている方には、地域の移住体験プログラムや空き家の情報をご紹介できます。</p>
+    </details>
+    <details>
+      <summary>契約期間はどのくらいですか？</summary>
+      <p>お試し入居はひと月です。本入居の期間は、ご相談に応じます。</p>
+    </details>
+    <details>
+      <summary>車は必要ですか？</summary>
+      <p>車があると、暮らしの幅が広がります。車がない場合の暮らし方も、お問い合わせのときにご相談ください。</p>
+    </details>
+    <details>
+      <summary>仕事はありますか？</summary>
+      <p>地域の仕事をご紹介できることもあります。ただし、入居の条件にはしていません。</p>
+    </details>
+  </div>
+</section>
+
+<section class="cta" id="contact">
+  <div class="wrap">
+    <h2>一度、見に来ませんか</h2>
+    <p>見学だけでも、質問だけでも歓迎です。空き状況は、お問い合わせのときにお伝えします。</p>
+    <p><a class="btn" href="mailto:furuya@akaonisya.jp?subject=%E8%B5%A4%E9%AC%BC%E3%83%8F%E3%82%A6%E3%82%B9%E3%81%AE%E3%81%93%E3%81%A8%E3%81%A7">メールで問い合わせる</a></p>
+    <p class="contact">
+      電話　<a href="tel:08039322241">080-3932-2241</a><br>
+      メール　<a href="mailto:furuya@akaonisya.jp">furuya@akaonisya.jp</a><br>
+      担当　古谷如弘
+    </p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    赤鬼ハウス-ともしび-　群馬県藤岡市鬼石423-1<br>
+    運営：<a href="/">労働者協同組合 赤鬼社</a>
+  </div>
+</footer>
+
+<script>
+/* 部屋タブ */
+const tabs = [...document.querySelectorAll(".tab")];
+function show(tab){
+  tabs.forEach(t => {
+    const on = t === tab;
+    t.setAttribute("aria-selected", on);
+    document.getElementById(t.getAttribute("aria-controls")).hidden = !on;
+  });
+}
+tabs.forEach((t, i) => {
+  t.addEventListener("click", () => show(t));
+  t.addEventListener("keydown", e => {
+    if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
+      e.preventDefault();
+      const next = tabs[(i + (e.key === "ArrowRight" ? 1 : tabs.length - 1)) % tabs.length];
+      next.focus(); show(next);
+    }
+  });
+});
+
+/* 部屋の写真切り替え */
+document.querySelectorAll(".room-photos").forEach(box => {
+  const main = box.querySelector(".main");
+  const cap = box.querySelector(".cap");
+  const thumbs = [...box.querySelectorAll(".thumb")];
+  thumbs.forEach(b => b.addEventListener("click", () => {
+    main.src = b.dataset.src;
+    main.alt = b.dataset.alt;
+    cap.textContent = b.dataset.cap;
+    thumbs.forEach(x => x.setAttribute("aria-pressed", x === b));
+  }));
+});
+</script>
+
+</body></html>
