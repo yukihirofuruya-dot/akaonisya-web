@@ -372,6 +372,14 @@
     .residency-detail-label { min-width: auto; }
   }
 
+  .video-works-link { margin-top: 40px; padding: 40px; border: 1px solid var(--sand); display: flex; justify-content: space-between; align-items: center; gap: 32px; flex-wrap: wrap; }
+  .video-works-link-text { flex: 1 1 320px; }
+  .video-works-link-title { font-family: 'Shippori Mincho', serif; font-size: 22px; letter-spacing: 0.08em; margin-bottom: 12px; }
+  .video-works-link-text p { font-size: 14px; line-height: 2; margin: 0; }
+  .video-works-link-note { color: var(--red-dark); margin-top: 8px !important; font-size: 13px !important; }
+  .video-works-link-btns { display: flex; flex-direction: column; gap: 14px; align-items: flex-start; }
+  .video-works-link-sub { font-size: 13px; color: inherit; letter-spacing: 0.08em; }
+  @media (max-width: 768px) { .video-works-link { padding: 28px 20px; } }
 </style>
 </head>
 <body>
@@ -659,6 +667,17 @@
           <div class="work-card-tag">Co-creation</div>
           <div class="work-card-title">個人、企業向け 共創プロジェクト</div>
           <p class="work-card-desc">新しいことに挑戦したい個人、企業向けに新規事業創出支援、ブランディング、マーケティング支援、デザイン、映像制作支援などを行っています。</p>
+        </div>
+      </div>
+      <div class="video-works-link reveal">
+        <div class="video-works-link-text">
+          <div class="video-works-link-title">映像制作の実績を見る</div>
+          <p>会社・サービス紹介、採用・入社式、商品紹介、行政PRなど、これまでに制作した映像をまとめてご覧いただけます。</p>
+          <p class="video-works-link-note">実績ページの閲覧にはアクセスコードが必要です。ご希望の方は、お問い合わせからお気軽にご連絡ください。</p>
+        </div>
+        <div class="video-works-link-btns">
+          <a href="/works/" class="hero-cta">実績ページへ</a>
+          <a href="#contact" class="video-works-link-sub">アクセスコードを問い合わせる</a>
         </div>
       </div>
     </div>
