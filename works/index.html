@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>映像制作 実績ポートフォリオ</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0f0f0f;
+    --surface: #181818;
+    --border: #2a2a2a;
+    --text: #e8e8e8;
+    --muted: #888;
+    --accent: #c8a96e;
+    --accent-dim: rgba(200,169,110,0.12);
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', 'Noto Sans JP', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+  }
+
+  /* ── GATE ── */
+  #gate {
+    position: fixed; inset: 0;
+    background: var(--bg);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    z-index: 100;
+    gap: 2rem;
+  }
+  #gate .logo {
+    font-size: 1rem;
+    letter-spacing: 0.3em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+  #gate h1 {
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    font-weight: 300;
+    letter-spacing: 0.05em;
+    text-align: center;
+    line-height: 1.4;
+  }
+  #gate p {
+    color: var(--muted);
+    font-size: 0.875rem;
+    letter-spacing: 0.05em;
+  }
+  #gate-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    width: 100%;
+    max-width: 320px;
+  }
+  #gate-input {
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-family: inherit;
+    font-size: 1rem;
+    letter-spacing: 0.15em;
+    padding: 0.875rem 1.25rem;
+    outline: none;
+    text-align: center;
+    transition: border-color 0.2s;
+  }
+  #gate-input:focus { border-color: var(--accent); }
+  #gate-input::placeholder { color: var(--muted); letter-spacing: 0.1em; }
+  #gate-btn {
+    width: 100%;
+    background: var(--accent);
+    color: #0f0f0f;
+    border: none;
+    font-family: inherit;
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 0.875rem;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+  #gate-btn:hover { opacity: 0.85; }
+  #gate-error {
+    color: #e07070;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+    min-height: 1.2em;
+  }
+
+  /* ── MAIN ── */
+  #main { display: none; }
+  #main.visible { display: block; }
+
+  header {
+    padding: 3rem 2rem 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  header .label {
+    font-size: 0.7rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  header h2 {
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 300;
+    letter-spacing: 0.05em;
+  }
+  header p {
+    color: var(--muted);
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    line-height: 1.7;
+  }
+
+  .category-nav {
+    max-width: 1100px;
+    margin: 2rem auto 0;
+    padding: 0 2rem;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .cat-btn {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-family: inherit;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .cat-btn:hover, .cat-btn.active {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: var(--accent-dim);
+  }
+
+  .grid {
+    max-width: 1100px;
+    margin: 2.5rem auto 4rem;
+    padding: 0 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    transition: border-color 0.25s;
+    cursor: pointer;
+  }
+  .card:hover { border-color: var(--accent); }
+
+  .video-wrap {
+    position: relative;
+    padding-top: 56.25%;
+    background: #000;
+    overflow: hidden;
+  }
+  .video-wrap iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+  .thumb {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .play-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.35);
+    transition: background 0.2s;
+  }
+  .card:hover .play-overlay { background: rgba(0,0,0,0.15); }
+  .play-icon {
+    width: 48px; height: 48px;
+    border: 2px solid rgba(255,255,255,0.8);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .play-icon svg { margin-left: 3px; }
+
+  .card-body {
+    padding: 1.25rem 1.5rem;
+  }
+  .card-category {
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.4rem;
+  }
+  .card-title {
+    font-size: 0.95rem;
+    font-weight: 400;
+    line-height: 1.5;
+    letter-spacing: 0.02em;
+  }
+  .card-client {
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-top: 0.3rem;
+  }
+
+  .card.playing .play-overlay { display: none; }
+
+  footer {
+    text-align: center;
+    padding: 2rem;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+  }
+
+  @media (max-width: 600px) {
+    .grid { grid-template-columns: 1fr; gap: 1.5rem; }
+    header { padding: 2rem 1.25rem 1.5rem; }
+    .category-nav { padding: 0 1.25rem; }
+    .grid { padding: 0 1.25rem; }
+  }
+
+  @media (max-width: 600px) {
+    #profile { grid-template-columns: 1fr !important; gap: 1rem !important; }
+    #profile img { width: 120px !important; height: 120px !important; }
+  }
+
+</style>
+</head>
+<body>
+
+<!-- GATE -->
+<div id="gate">
+  <span class="logo">Portfolio</span>
+  <h1>映像制作<br>実績集</h1>
+  <p>アクセスコードを入力してください</p>
+  <div id="gate-form">
+    <input id="gate-input" type="password" placeholder="ACCESS CODE" autocomplete="off" />
+    <button id="gate-btn" onclick="checkCode()">ENTER</button>
+    <span id="gate-error"></span>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div id="main">
+  <header>
+    <span class="label">Video Works</span>
+    <h2>映像制作 実績ポートフォリオ</h2>
+    <p>企業PR・採用・サービス紹介・導入事例など、<br>様々な映像制作の実績をご紹介します。</p>
+  </header>
+
+  <nav class="category-nav">
+    <button class="cat-btn active" onclick="filterCategory('all', this)">すべて</button>
+    <button class="cat-btn" onclick="filterCategory('pr', this)">会社・サービス紹介</button>
+    <button class="cat-btn" onclick="filterCategory('case', this)">導入事例</button>
+    <button class="cat-btn" onclick="filterCategory('recruit', this)">採用・入社式</button>
+    <button class="cat-btn" onclick="filterCategory('regional', this)">地域・その他</button>
+    <button class="cat-btn" onclick="filterCategory('product', this)">商品紹介</button>
+    <button class="cat-btn" onclick="filterCategory('cm', this)">映画CM</button>
+    <button class="cat-btn" onclick="filterCategory('gov', this)">行政PR</button>
+  </nav>
+
+  <div class="grid" id="grid"></div>
+
+  
+  <section id="profile" style="max-width:1100px;margin:0 auto 0;padding:0 2rem 4rem;border-top:1px solid var(--border);display:grid;grid-template-columns:200px 1fr;gap:3rem;align-items:start;">
+    <div>
+      <img src="profile.jpg" alt="古谷如弘" style="width:180px;height:180px;object-fit:cover;object-position:center top;border-radius:2px;display:block;">
+    </div>
+    <div>
+      <span style="font-size:0.7rem;letter-spacing:0.4em;text-transform:uppercase;color:var(--accent);display:block;margin-top:2rem;margin-bottom:0.75rem;">Profile</span>
+      <h3 style="font-size:1.25rem;font-weight:300;letter-spacing:0.05em;margin-bottom:0.25rem;">古谷 如弘</h3>
+      <p style="font-size:0.8rem;color:var(--muted);letter-spacing:0.1em;margin-bottom:1.25rem;">労働者協同組合赤鬼社 代表理事</p>
+      <p style="font-size:0.875rem;line-height:1.9;color:#ccc;">フジテレビのドラマ制作を行うバスクにて映像編集マンとしてキャリアをスタート。<br>30歳からウェブ動画ディレクター、マーケター、経営コンサルタントとキャリアを重ね、事業立ち上げ支援とストーリーテリングを武器に、のべ700本以上の映像を制作している。</p>
+    </div>
+  </section>
+
+  <section id="contact" style="max-width:1100px;margin:0 auto;padding:3rem 2rem 4rem;border-top:1px solid var(--border);">
+    <span style="font-size:0.7rem;letter-spacing:0.4em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:0.75rem;">Contact</span>
+    <h3 style="font-size:1.25rem;font-weight:300;letter-spacing:0.05em;margin-bottom:2rem;">映像制作のご相談</h3>
+    <form id="contact-form" action="https://formspree.io/f/mbdebeel" method="POST" style="max-width:560px;display:flex;flex-direction:column;gap:1rem;">
+      <input name="name" type="text" placeholder="お名前" required style="background:var(--surface);border:1px solid var(--border);color:var(--text);font-family:inherit;font-size:0.9rem;padding:0.875rem 1.25rem;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'">
+      <input name="email" type="email" placeholder="メールアドレス" required style="background:var(--surface);border:1px solid var(--border);color:var(--text);font-family:inherit;font-size:0.9rem;padding:0.875rem 1.25rem;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'">
+      <textarea name="message" placeholder="ご相談内容" rows="5" required style="background:var(--surface);border:1px solid var(--border);color:var(--text);font-family:inherit;font-size:0.9rem;padding:0.875rem 1.25rem;outline:none;resize:vertical;transition:border-color 0.2s;" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'"></textarea>
+      <button type="submit" style="background:var(--accent);color:#0f0f0f;border:none;font-family:inherit;font-size:0.875rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;padding:0.875rem;cursor:pointer;transition:opacity 0.2s;align-self:flex-start;padding-left:2.5rem;padding-right:2.5rem;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">SEND</button>
+      <p id="form-status" style="font-size:0.8rem;color:var(--accent);min-height:1.2em;"></p>
+    </form>
+  </section>
+
+  <script>
+    const form = document.getElementById('contact-form');
+    if (form) {
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const status = document.getElementById('form-status');
+        const data = new FormData(form);
+        try {
+          const res = await fetch(form.action, { method: 'POST', body: data, headers: { 'Accept': 'application/json' } });
+          if (res.ok) { status.textContent = '送信しました。ありがとうございます。'; form.reset(); }
+          else { status.textContent = '送信に失敗しました。メールでご連絡ください。'; }
+        } catch { status.textContent = '送信に失敗しました。メールでご連絡ください。'; }
+      });
+    }
+  </script>
+
+  <footer>© Yukihiro / 赤鬼社　— 映像制作のご相談はお気軽にどうぞ</footer>
+</div>
+
+<script>
+  const PASS = 'Akaonisya0804';
+
+  const works = [
+
+  
+    {
+      id: 'photonogis-review',
+      category: 'product',
+      categoryLabel: '商品紹介',
+      title: 'フォトノギス 審査向けムービー',
+      client: 'フォトノギス',
+      vimeoId: '1202406298',
+      hash: '7c620359de',
+    },
+    {
+      id: 'kominka-real',
+      category: 'gov',
+      categoryLabel: '行政PR',
+      title: 'コミンカコナイカ PR実写映像',
+      client: '行政PR',
+      vimeoId: '1202406971',
+      hash: '916c123d51',
+    },
+    {
+      id: 'itoki-2026',
+      category: 'recruit',
+      categoryLabel: '採用・入社式',
+      title: 'イトーキ 2026入社式',
+      client: '株式会社イトーキ',
+      vimeoId: '1174305769',
+      hash: 'f78e0b2320',
+    },
+    
+    {
+      id: 'itoki-sas',
+      category: 'case',
+      categoryLabel: '導入事例',
+      title: 'システムストリーマーSAS ELECOM篇',
+      client: '株式会社イトーキ',
+      vimeoId: '270315927',
+      hash: 'd6984a383a',
+    },
+    {
+      id: 'haba',
+      category: 'pr',
+      categoryLabel: '会社・サービス紹介',
+      title: 'サービス紹介動画',
+      client: 'haba',
+      vimeoId: '352901140',
+      hash: null,
+    },
+    {
+      id: 'seisan',
+      category: 'pr',
+      categoryLabel: '会社・サービス紹介',
+      title: 'SNS動画広告「実相寺 青山納骨堂」',
+      client: 'せいざん株式会社',
+      vimeoId: '270911079',
+      hash: null,
+    },
+    {
+      id: 'casy',
+      category: 'pr',
+      categoryLabel: '会社・サービス紹介',
+      title: 'エンゲージメント動画',
+      client: 'CaSy株式会社',
+      vimeoId: '270811280',
+      hash: null,
+    },
+    {
+      id: 'homenet',
+      category: 'pr',
+      categoryLabel: '会社・サービス紹介',
+      title: 'サービス紹介動画「見守っTELプラス」',
+      client: 'ホームネット株式会社',
+      vimeoId: '270315319',
+      hash: null,
+    },
+    {
+      id: 'miyazaki',
+      category: 'regional',
+      categoryLabel: '地域・その他',
+      title: '宮崎移住計画',
+      client: '宮崎県移住促進',
+      vimeoId: '194451957',
+      hash: null,
+    },
+    {
+      id: 'bornlux',
+      category: 'pr',
+      categoryLabel: '会社・サービス紹介',
+      title: '会社紹介動画',
+      client: 'ボーンレックス',
+      vimeoId: '540568042',
+      hash: 'f027f05a51',
+    },
+    {
+      id: 'itoki-125',
+      category: 'pr',
+      categoryLabel: '会社・サービス紹介',
+      title: 'ITOKI PRESENTATION 125',
+      client: '株式会社イトーキ',
+      vimeoId: '270927598',
+      hash: null,
+    },
+    {
+      id: 'itoki-office',
+      category: 'pr',
+      categoryLabel: '会社・サービス紹介',
+      title: 'オフィス移転プロモーションムービー',
+      client: '株式会社イトーキ',
+      vimeoId: '274012805',
+      hash: '14f042384e',
+    },
+    {
+      id: 'lespace',
+      category: 'product',
+      categoryLabel: '商品紹介',
+      title: '商品紹介動画',
+      client: 'レスパス',
+      vimeoId: '643370793',
+      hash: 'aa6ea0ad01',
+    },
+    {
+      id: 'kominka-anime',
+      category: 'gov',
+      categoryLabel: '行政PR',
+      title: 'コミンカコナイカ PRアニメーション',
+      client: '行政PR',
+      vimeoId: '1202406734',
+      hash: 'cc63b204fd',
+    },
+    {
+      id: 'itoki-dap',
+      category: 'pr',
+      categoryLabel: '会社・サービス紹介',
+      title: 'イトーキ DAPプロモーション',
+      client: '株式会社イトーキ',
+      vimeoId: '1119731629',
+      hash: '606fb3a74b',
+    },
+    {
+      id: 'itoki-2025',
+      category: 'recruit',
+      categoryLabel: '採用・入社式',
+      title: 'イトーキ 2025入社式',
+      client: '株式会社イトーキ',
+      vimeoId: '1119744401',
+      hash: 'd7ab616682',
+    },
+    {
+      id: 'itoki-vertebra',
+      category: 'pr',
+      categoryLabel: '会社・サービス紹介',
+      title: 'イトーキ Vertebra English',
+      client: '株式会社イトーキ',
+      vimeoId: '1119743345',
+      hash: 'd210e87b36',
+    },
+    {
+      id: 'tiltoru',
+      category: 'product',
+      categoryLabel: '商品紹介',
+      title: 'Tiltoru 紹介ムービー',
+      client: 'TTES様',
+      vimeoId: '1119732910',
+      hash: 'ef293a08dc',
+    },
+    {
+      id: 'gngn',
+      category: 'pr',
+      categoryLabel: '会社・サービス紹介',
+      title: '株式会社gngn スペシャルムービー',
+      client: '株式会社gngn',
+      vimeoId: '325668936',
+      hash: 'b0653c1d77',
+    },
+    {
+      id: 'junior-village',
+      category: 'pr',
+      categoryLabel: '会社・サービス紹介',
+      title: 'ジュニアビレッジ 教材ビデオ',
+      client: 'ジュニアビレッジ',
+      vimeoId: '1119733993',
+      hash: 'f224b4a27a',
+    },
+    {
+      id: 'chitose-matsuri',
+      category: 'regional',
+      categoryLabel: '地域・その他',
+      title: '千年祭り インスタグラム用ムービー',
+      client: '地域イベント',
+      vimeoId: '1119734361',
+      hash: 'f76b151e64',
+    },
+    {
+      id: 'photonogis-intro',
+      category: 'product',
+      categoryLabel: '商品紹介',
+      title: 'フォトノギス 紹介ムービー',
+      client: 'フォトノギス',
+      vimeoId: '1119736287',
+      hash: '6c4e8b8aa4',
+    },
+    {
+      id: 'itoki-bml',
+      category: 'case',
+      categoryLabel: '導入事例',
+      title: 'イトーキ BML様 SAS導入事例',
+      client: '株式会社イトーキ',
+      vimeoId: '1119732694',
+      hash: 'd5982b3c6a',
+    },
+    {
+      id: 'nyaran',
+      category: 'cm',
+      categoryLabel: '映画CM',
+      title: 'にゃらんCM',
+      client: 'にゃらん',
+      vimeoId: '270927669',
+      hash: '8b4bd6d7a0',
+    },
+    {
+      id: 'shingiji-drama',
+      category: 'pr',
+      categoryLabel: '会社・サービス紹介',
+      title: 'もしも社内で新規事業開発プロジェクトが始まったら',
+      client: '企業PR',
+      vimeoId: '315371459',
+      hash: '81c4f5479d',
+    },
+    {
+      id: 'oni-rock',
+      category: 'regional',
+      categoryLabel: '地域・その他',
+      title: '鬼Rock! イベント紹介ムービー',
+      client: '鬼石',
+      vimeoId: '376378915',
+      hash: '1730ca624a',
+    },
+    {
+      id: '3rd-menu',
+      category: 'product',
+      categoryLabel: '商品紹介',
+      title: '3rd menu サービス紹介ムービー',
+      client: '3rd menu',
+      vimeoId: '566912862',
+      hash: '0448b74145',
+    },
+    {
+      id: 'onishi-natsu2',
+      category: 'regional',
+      categoryLabel: '地域・その他',
+      title: '鬼石夏祭り2019 Find群馬コンテスト優秀賞',
+      client: '鬼石・藤岡市',
+      vimeoId: '643371251',
+      hash: '9d9fe0313f',
+    },
+    {
+      id: 'nogizaka',
+      category: 'cm',
+      categoryLabel: '映画CM',
+      title: '乃木坂46 フレンチエキスポ オープニングムービー',
+      client: 'イベント',
+      vimeoId: '228170221',
+      hash: '058acbfec3',
+    },
+    {
+      id: 'ikoyo-ryokan',
+      category: 'pr',
+      categoryLabel: '会社・サービス紹介',
+      title: '仲居さん番頭さん旅館体験',
+      client: 'アクトインディ株式会社',
+      vimeoId: '270315976',
+      hash: 'a020890f96',
+    },
+    {
+      id: 'ikoyo-nakai',
+      category: 'pr',
+      categoryLabel: '会社・サービス紹介',
+      title: 'いこーよイベント 中居さん',
+      client: 'アクトインディ株式会社',
+      vimeoId: '270911092',
+      hash: null,
+    },
+    {
+      id: 'cocoa-motors',
+      category: 'product',
+      categoryLabel: '商品紹介',
+      title: 'Cocoa Motors 新製品紹介動画',
+      client: 'Cocoa Motors株式会社',
+      vimeoId: '166776778',
+      hash: '1fb035a000',
+    },
+    {
+      id: 'teijin-miraito',
+      category: 'pr',
+      categoryLabel: '会社・サービス紹介',
+      title: '帝人ミライトCM',
+      client: '帝人ミライト',
+      vimeoId: '1119735657',
+      hash: 'e587b383ee',
+    },
+    {
+      id: 'gyaruko',
+      category: 'cm',
+      categoryLabel: '映画CM',
+      title: '漫画CM 教えてギャル子ちゃん',
+      client: 'ひかりTV',
+      vimeoId: '270319254',
+      hash: 'c60df30ca0',
+    },
+    {
+      id: 'gundam-vimeo',
+      category: 'cm',
+      categoryLabel: '映画CM',
+      title: 'ウェブ動画広告「機動戦士ガンダムTHE ORIGIN」',
+      client: 'ひかりTV',
+      vimeoId: '270911108',
+      hash: 'f9e926a87f',
+    },
+    {
+      id: 'iamaherо-vimeo',
+      category: 'cm',
+      categoryLabel: '映画CM',
+      title: 'ウェブ動画広告「アイアムアヒーロー」',
+      client: 'ひかりTV',
+      vimeoId: '270911115',
+      hash: '701687d628',
+    },
+    {
+      id: 'rizap',
+      category: 'pr',
+      categoryLabel: '会社・サービス紹介',
+      title: 'ライザップ ボディメイクグランプリ2016 オープニング',
+      client: 'RIZAPグループ株式会社',
+      vimeoId: '270927590',
+      hash: null,
+    },
+    {
+      id: 'agf',
+      category: 'product',
+      categoryLabel: '商品紹介',
+      title: 'AGFトリプレッソ 発表会用動画',
+      client: 'AGF',
+      vimeoId: '84378825',
+      hash: '1766c0fb26',
+    },
+    {
+      id: 'andesign',
+      category: 'pr',
+      categoryLabel: '会社・サービス紹介',
+      title: 'デジタルサイネージ動画「andesign」',
+      client: '株式会社アンデザイン',
+      vimeoId: '270927617',
+      hash: 'c11c4af6b3',
+    },
+    {
+      id: 'match-girl',
+      category: 'pr',
+      categoryLabel: '会社・サービス紹介',
+      title: 'アプリ内コンテンツ「マッチ売りの少女」',
+      client: '株式会社ベクトル',
+      vimeoId: '270927627',
+      hash: '1fd76aab69',
+    },
+    {
+      id: 'istoire',
+      category: 'pr',
+      categoryLabel: '会社・サービス紹介',
+      title: '結婚式場イストアール プロジェクションマッピング',
+      client: 'イストアール',
+      vimeoId: '141955384',
+      hash: '125b1a18d0',
+    },
+    {
+      id: 'neko-funjatta',
+      category: 'pr',
+      categoryLabel: '会社・サービス紹介',
+      title: 'アプリ内コンテンツ「猫ふんじゃった」',
+      client: '株式会社ベクトル',
+      vimeoId: '270927659',
+      hash: 'b51f307db2',
+    },
+    {
+      id: 'itoki-mindfitness',
+      category: 'pr',
+      categoryLabel: '会社・サービス紹介',
+      title: 'イトーキ マインドフィットネス レクチャー動画',
+      client: '株式会社イトーキ',
+      vimeoId: '304057472',
+      hash: 'cb76ecb7b8',
+    },
+    {
+      id: 'itoki-monotaro',
+      category: 'case',
+      categoryLabel: '導入事例',
+      title: 'イトーキ SAS モノタロウ篇',
+      client: '株式会社イトーキ',
+      vimeoId: '270927562',
+      hash: '90083aeae9',
+    },];
+
+  let currentCategory = 'all';
+
+  function vimeoThumb(id) {
+    return `https://vimeo.com/api/oembed.json?url=https://vimeo.com/${id}`;
+  }
+
+  function embedUrl(work) {
+    if (work.youtubeId) {
+      return `https://www.youtube.com/embed/${work.youtubeId}?autoplay=1`;
+    }
+    let url = `https://player.vimeo.com/video/${work.vimeoId}?autoplay=1&title=0&byline=0&portrait=0`;
+    if (work.hash) url += `&h=${work.hash}`;
+    return url;
+  }
+
+  function thumbUrl(work) {
+    if (work.youtubeId) {
+      return `https://img.youtube.com/vi/${work.youtubeId}/hqdefault.jpg`;
+    }
+    return `https://vumbnail.com/${work.vimeoId}.jpg`;
+  }
+
+  function renderGrid(category) {
+    const grid = document.getElementById('grid');
+    grid.innerHTML = '';
+    const filtered = category === 'all' ? works : works.filter(w => w.category === category);
+    filtered.forEach(work => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.id = `card-${work.id}`;
+      card.innerHTML = `
+        <div class="video-wrap" id="wrap-${work.id}">
+          <img class="thumb" src="${thumbUrl(work)}" alt="${work.title}" loading="lazy" onerror="this.style.background='#222';this.style.display='block'">
+          <div class="play-overlay" onclick="playVideo('${work.id}')">
+            <div class="play-icon">
+              <svg width="16" height="18" viewBox="0 0 16 18" fill="none">
+                <path d="M1 1L15 9L1 17V1Z" fill="white"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-category">${work.categoryLabel}</div>
+          <div class="card-title">${work.title}</div>
+          <div class="card-client">${work.client}</div>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+  }
+
+  function playVideo(id) {
+    const work = works.find(w => w.id === id);
+    const wrap = document.getElementById(`wrap-${id}`);
+    const card = document.getElementById(`card-${id}`);
+    wrap.innerHTML = `<iframe src="${embedUrl(work)}" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>`;
+    card.classList.add('playing');
+  }
+
+  function filterCategory(cat, btn) {
+    currentCategory = cat;
+    document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderGrid(cat);
+  }
+
+  function checkCode() {
+    const input = document.getElementById('gate-input').value.trim();
+    const error = document.getElementById('gate-error');
+    if (input === PASS) {
+      document.getElementById('gate').style.display = 'none';
+      const main = document.getElementById('main');
+      main.classList.add('visible');
+      renderGrid('all');
+    } else {
+      error.textContent = 'コードが正しくありません';
+      document.getElementById('gate-input').value = '';
+    }
+  }
+
+  document.getElementById('gate-input').addEventListener('keydown', e => {
+    if (e.key === 'Enter') checkCode();
+  });
+</script>
+</body>
+</html>
