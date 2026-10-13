@@ -152,6 +152,19 @@ dl.faq{margin:0}
 dl.faq dt{font-weight:500;font-size:15.5px;padding:16px 0 4px;border-top:1px solid var(--rule-2)}
 dl.faq dt:first-of-type{border-top:1px solid var(--rule)}
 dl.faq dd{margin:0 0 4px;font-size:15px;color:var(--ink-2);line-height:1.85;padding-bottom:12px}
+.apply{display:flex;flex-direction:column;gap:16px;margin:0}
+.apply label{display:block;font-size:14.5px;font-weight:500;color:var(--ink)}
+.apply .req,.apply .opt{white-space:nowrap;display:inline-block;font-size:11.5px;font-weight:400;margin-left:8px;letter-spacing:.04em}
+.apply .req{color:var(--oni)}
+.apply .opt{color:var(--ink-3)}
+.apply input,.apply textarea,.apply select{
+  font:inherit;font-size:16px;font-weight:400;color:var(--ink);background:var(--paper);
+  border:1px solid var(--rule);border-radius:2px;padding:11px 12px;width:100%;line-height:1.6;display:block;margin-top:6px}
+.apply input:focus,.apply textarea:focus,.apply select:focus{outline:2px solid var(--stone);outline-offset:1px;border-color:transparent}
+.apply .privacy{font-size:13px;color:var(--ink-3);margin:0}
+.apply button.btn{border:0;cursor:pointer;align-self:flex-start;font-family:inherit}
+.apply button.btn[disabled]{opacity:.6;cursor:default}
+.status{font-size:14.5px;margin:0;min-height:1em;color:var(--stone)}
 .hero{max-width:960px;margin:0 auto}
 .hero img{width:100%;height:auto;display:block}
 figure.photo{margin:0 0 28px}
@@ -316,9 +329,32 @@ footer .org{color:var(--ink-2)}
 <section>
   <div class="cta">
     <h2>まず話してみる</h2>
-    <p>プログラムの中身や、いまお持ちの構想について、オンラインで30分ほどお話しします。参加を決めていなくても構いません。ひとことご連絡いただければ、こちらから日程の候補をお出しします。</p>
-    <a class="btn" href="mailto:furuya@akaonisya.jp?subject=%E8%B5%A4%E9%AC%BC%E8%B5%B7%E6%A5%AD%E3%83%AC%E3%82%B8%E3%83%87%E3%83%B3%E3%82%B9%E3%81%AE%E5%80%8B%E5%88%A5%E7%9B%B8%E8%AB%87%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6">個別相談を申し込む</a>
-    <p class="alt">ボタンでメールが開かない場合は、<a href="mailto:furuya@akaonisya.jp">furuya@akaonisya.jp</a> 宛に「個別相談希望」とだけ送ってください。お電話（<a href="tel:08039322241">080-3932-2241</a>）でも受け付けます。</p>
+    <p>プログラムの中身や、いまお持ちの構想について、オンラインで30分ほどお話しします。参加を決めていなくても構いません。下のフォームからお申し込みいただければ、こちらから日程の候補をお送りします。</p>
+    <form id="apply" class="apply" action="https://formspree.io/f/mbdebeel" method="POST">
+      <input type="hidden" name="_subject" value="【赤鬼起業レジデンス】個別相談の申込">
+      <input type="hidden" name="種別" value="赤鬼起業レジデンス 個別相談">
+      <label>お名前<span class="req">必須</span><input type="text" name="name" autocomplete="name" required></label>
+      <label>メールアドレス<span class="req">必須</span><input type="email" name="email" autocomplete="email" required></label>
+      <label>電話番号<span class="opt">任意</span><input type="tel" name="電話番号" autocomplete="tel"></label>
+      <label>お住まいの地域<span class="opt">任意</span><input type="text" name="お住まいの地域" placeholder="例：東京都世田谷区"></label>
+      <label>相談の希望日時<span class="req">必須</span><textarea name="希望日時" rows="3" required placeholder="例：平日20時以降、土曜の午前など。いくつか書いていただければ、こちらから候補をお送りします"></textarea></label>
+      <label>このプログラムを知ったきっかけ<span class="opt">任意</span>
+        <select name="きっかけ">
+          <option value="">選んでください</option>
+          <option>知人からの紹介</option>
+          <option>SNS</option>
+          <option>赤鬼社のサイト</option>
+          <option>検索</option>
+          <option>鬼石のイベント・ツアー</option>
+          <option>その他</option>
+        </select>
+      </label>
+      <label>いま考えていること、聞いてみたいこと<span class="opt">任意</span><textarea name="message" rows="4" placeholder="まだ何も決まっていなくても大丈夫です"></textarea></label>
+      <p class="privacy">いただいた情報は、個別相談とこのプログラムのご連絡にのみ使います。</p>
+      <button type="submit" class="btn">個別相談を申し込む</button>
+      <p id="apply-status" class="status" role="status" aria-live="polite"></p>
+    </form>
+    <p class="alt">フォームがうまく送れない場合は、<a href="mailto:furuya@akaonisya.jp?subject=%E8%B5%A4%E9%AC%BC%E8%B5%B7%E6%A5%AD%E3%83%AC%E3%82%B8%E3%83%87%E3%83%B3%E3%82%B9%E3%81%AE%E5%80%8B%E5%88%A5%E7%9B%B8%E8%AB%87%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6">furuya@akaonisya.jp</a> 宛に「個別相談希望」とだけ送ってください。お電話（<a href="tel:08039322241">080-3932-2241</a>）でも受け付けます。</p>
     <p class="deadline">個別相談の受付は11月20日（金）まで。定員に達し次第、締め切ります。</p>
   </div>
 </section>
@@ -337,5 +373,23 @@ footer .org{color:var(--ink-2)}
 </footer>
 
 </div>
+<script>
+(function(){
+  var f=document.getElementById('apply'); if(!f) return;
+  var st=document.getElementById('apply-status');
+  f.addEventListener('submit',function(e){
+    if(!window.fetch) return;
+    e.preventDefault();
+    var b=f.querySelector('button'); b.disabled=true; st.textContent='送信しています…';
+    fetch(f.action,{method:'POST',body:new FormData(f),headers:{'Accept':'application/json'}})
+      .then(function(r){
+        if(r.ok){f.reset();st.textContent='受け付けました。こちらから日程の候補をメールでお送りします。';}
+        else{st.textContent='送信できませんでした。お手数ですが、下のメールアドレスかお電話でご連絡ください。';}
+      })
+      .catch(function(){st.textContent='送信できませんでした。お手数ですが、下のメールアドレスかお電話でご連絡ください。';})
+      .then(function(){b.disabled=false;});
+  });
+})();
+</script>
 </body>
 </html>
