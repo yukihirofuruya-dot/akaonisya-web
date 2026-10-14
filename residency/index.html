@@ -113,6 +113,8 @@ p{margin:0 0 20px}
   font-size:15.5px;line-height:1.8;
 }
 .day li:last-child{border-bottom:none}
+.day li:has(.t){display:grid;grid-template-columns:3.6em 1fr}
+.day li .t{color:var(--ink-3);font-size:14px;font-variant-numeric:tabular-nums}
 
 .who{margin:0;padding:0;list-style:none}
 .who li{
@@ -213,35 +215,40 @@ footer .org{color:var(--ink-2)}
   <ol class="days">
     <li class="day">
       <p class="day-n">一日目　知る</p>
-      <p class="day-d">11月27日（金）午後から</p>
+      <p class="day-d">11月27日（金）</p>
       <ul>
-        <li>鬼石という町の成り立ちと、いま起きていること</li>
-        <li>この地域で事業を営む人との対話</li>
-        <li>夜は住民を交えた交流会</li>
+        <li><span class="t">13:15</span>JR神保原駅に集合。車でお迎えします</li>
+        <li><span class="t">14:00</span>鬼石という町の成り立ちと、いま起きていること</li>
+        <li><span class="t">15:00</span>空き家をアーティストの宿やアトリエ、展示の場に変えてきたアートの拠点を訪ねる。明るいうちに家々を見て、運営する人と対話</li>
+        <li><span class="t">17:15</span>各宿にチェックイン</li>
+        <li><span class="t">19:00</span>住民を交えた交流会（赤鬼ハウス）</li>
       </ul>
     </li>
     <li class="day">
       <p class="day-n">二日目　見る、触る</p>
       <p class="day-d">11月28日（土）</p>
       <ul>
-        <li>空き家2軒の見学（うち1軒は拠点の赤鬼ハウス）と、地域の活用事例をめぐる</li>
-        <li>赤鬼ハウスの一室を、実際に手を入れて直す</li>
-        <li>見てきたものをもとに、事業の構想を立てる</li>
+        <li><span class="t">9:30</span>空き家2軒の見学（拠点の赤鬼ハウスと、元ドライブインの建物）</li>
+        <li><span class="t">11:00</span>空き家を宿に生まれ変わらせた、町内の事例を2か所めぐる</li>
+        <li><span class="t">12:30</span>昼食（道の駅 上州おにし）</li>
+        <li><span class="t">13:45</span>赤鬼ハウスの一室を、実際に手を入れて直す</li>
+        <li><span class="t">夕方</span>夕食は各自で。見てきたものをもとに、事業の構想を考える</li>
       </ul>
       <figure class="photo"><img src="img/diy-wall.jpg" alt="赤鬼ハウスの一室で、白い壁を塗る作業の合間にポーズをとる4人" loading="lazy"><figcaption>これまでの赤鬼ハウスのDIYから。みんなで壁を塗り直した日</figcaption></figure>
     </li>
     <li class="day">
       <p class="day-n">三日目　描く</p>
-      <p class="day-d">11月29日（日）15時解散</p>
+      <p class="day-d">11月29日（日）16時解散</p>
       <ul>
-        <li>収支とターゲットを置いて、計画の形にする</li>
-        <li>発表の前に、ひとりずつ内容を見て手を入れる</li>
-        <li>地域の人たちの前で発表し、率直な反応をもらう</li>
-        <li>全体で3日間をふりかえって解散</li>
+        <li><span class="t">9:30</span>構想を、収支とターゲットのある計画の形にする。ひとりずつ内容を見て手を入れる</li>
+        <li><span class="t">13:30</span>地域の人たちの前で発表し、率直な反応をもらう</li>
+        <li><span class="t">15:00</span>3日間をふりかえる</li>
+        <li><span class="t">16:00</span>解散。神保原駅までお送りします</li>
       </ul>
       <figure class="photo"><img src="img/r12.jpg" alt="赤鬼ハウス2階の12畳。手前の杉の床から、座卓のある奥の部屋まで見渡せる" loading="lazy"><figcaption>赤鬼ハウス2階の12畳</figcaption></figure>
     </li>
   </ol>
+  <p class="note">時間は目安です。当日の様子や天候によって変わることがあります。</p>
 </section>
 
 <section>
@@ -259,7 +266,7 @@ footer .org{color:var(--ink-2)}
   <h2>開催概要</h2>
   <dl class="spec">
     <dt>日程</dt>
-    <dd>2026年11月27日（金）〜29日（日）　2泊3日<br>金曜は午後から始めます。日曜は15時に解散します</dd>
+    <dd>2026年11月27日（金）〜29日（日）　2泊3日<br>金曜13:15にJR神保原駅に集合、日曜16時に解散します（駅まで送迎します）</dd>
     <dt>会場</dt>
     <dd>群馬県藤岡市鬼石地区（東京から車で約2時間）<br>JR高崎線 神保原駅から車で送迎します</dd>
     <dt>定員</dt>
@@ -285,7 +292,7 @@ footer .org{color:var(--ink-2)}
   <h2>よくある質問</h2>
   <dl class="faq">
     <dt>車がなくても参加できますか</dt>
-    <dd>はい。JR高崎線の神保原駅から車で送迎します。集合の時間は、参加が決まった方にご案内します。</dd>
+    <dd>はい。JR高崎線の神保原駅から車で送迎します。金曜13:15に駅に集合し、日曜は16時の解散後に駅までお送りします。</dd>
     <dt>事業のアイデアがなくても大丈夫ですか</dt>
     <dd>大丈夫です。家と町を実際に見て、人の話を聞きながら、3日間で一緒に考えていきます。</dd>
     <dt>一人で参加しても大丈夫ですか</dt>
