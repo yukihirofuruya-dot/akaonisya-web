@@ -336,11 +336,12 @@ footer .org{color:var(--ink-2)}
     <dt>日程</dt>
     <dd>10月28日（水）21:00〜22:00<br>11月13日（金）21:00〜22:00</dd>
     <dt>場所</dt>
-    <dd>オンライン（参加用のURLは、お申し込み後にお送りします）</dd>
+    <dd>オンライン（Google Meet。参加用のURLは、お申し込み後すぐにメールでお送りします）</dd>
     <dt>参加費</dt>
     <dd>無料</dd>
   </dl>
-  <form class="apply js-form" action="https://formspree.io/f/mbdebeel" method="POST" data-done="受け付けました。参加用のURLを、開催日の前日までにメールでお送りします。" style="margin-top:24px">
+  <form class="apply js-form" action="https://formspree.io/f/mbdebeel" method="POST" data-done="受け付けました。参加用のURLをメールでお送りしました。届かない場合は、迷惑メールのフォルダもご確認ください。" style="margin-top:24px">
+    <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px">
     <input type="hidden" name="_subject" value="【赤鬼起業レジデンス】オンライン相談会の申込">
     <input type="hidden" name="種別" value="赤鬼起業レジデンス オンライン相談会">
     <label>お名前<span class="req">必須</span><input type="text" name="name" autocomplete="name" required></label>
@@ -376,8 +377,9 @@ footer .org{color:var(--ink-2)}
   <div class="cta">
     <h2>参加を申し込む</h2>
     <p>下のフォームからお申し込みください。お申し込みいただいた方には、視察する空き家2軒の詳しい情報をお送りします。そのうえで内容を拝見して選考し、結果をメールでご連絡します。</p>
-    <form id="apply" class="apply js-form" action="https://formspree.io/f/mbdebeel" method="POST" data-done="お申し込みを受け付けました。視察する空き家の詳しい情報を、メールでお送りします。">
-      <input type="hidden" name="_subject" value="【赤鬼起業レジデンス】参加申込">
+    <form id="apply" class="apply js-form" action="https://formspree.io/f/mbdebeel" method="POST" data-done="お申し込みを受け付けました。視察する空き家の詳しい情報を、メールでお送りしました。届かない場合は、迷惑メールのフォルダもご確認ください。">
+      <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px">
+    <input type="hidden" name="_subject" value="【赤鬼起業レジデンス】参加申込">
       <input type="hidden" name="種別" value="赤鬼起業レジデンス 参加申込">
       <label>お名前<span class="req">必須</span><input type="text" name="name" autocomplete="name" required></label>
       <label>メールアドレス<span class="req">必須</span><input type="email" name="email" autocomplete="email" required></label>
@@ -437,6 +439,7 @@ footer .org{color:var(--ink-2)}
 </div>
 <script>
 (function(){
+  var AUTOREPLY_URL=''; // Google Apps Script の公開URL
   var forms=document.querySelectorAll('form.js-form');
   var fail='送信できませんでした。お手数ですが、メールかお電話でご連絡ください。';
   Array.prototype.forEach.call(forms,function(f){
@@ -445,7 +448,9 @@ footer .org{color:var(--ink-2)}
       if(!window.fetch) return;
       e.preventDefault();
       var b=f.querySelector('button'); b.disabled=true; st.textContent='送信しています…';
-      fetch(f.action,{method:'POST',body:new FormData(f),headers:{'Accept':'application/json'}})
+      var fd=new FormData(f);
+      if(AUTOREPLY_URL){ try{ fetch(AUTOREPLY_URL,{method:'POST',mode:'no-cors',body:new URLSearchParams(fd)}); }catch(_){} }
+      fetch(f.action,{method:'POST',body:fd,headers:{'Accept':'application/json'}})
         .then(function(r){
           if(r.ok){f.reset();st.textContent=f.getAttribute('data-done');}
           else{st.textContent=fail;}
