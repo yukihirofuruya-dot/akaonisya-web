@@ -298,7 +298,6 @@ footer .org{color:var(--ink-2)}
     <dd>令和8年度 群馬県過疎地域いきいき集落づくり支援事業</dd>
   </dl>
   <p class="note">第2回を2027年1月に予定しています。今回の日程が合わない方はご相談ください。</p>
-  <p class="note">説明会も予定しています。日程が決まりしだい、このページでお知らせします。</p>
 </section>
 
 <section>
@@ -317,6 +316,35 @@ footer .org{color:var(--ink-2)}
   </dl>
 </section>
 
+<section id="session">
+  <h2>オンライン相談会</h2>
+  <p>プログラムの内容を紹介し、質問にお答えする場を2回ひらきます。申し込むか迷っている方も、話を聞くだけの方も歓迎です。顔出しは必要ありません。</p>
+  <dl class="spec">
+    <dt>日程</dt>
+    <dd>10月28日（水）20:00〜21:00<br>11月13日（金）20:00〜21:00</dd>
+    <dt>場所</dt>
+    <dd>オンライン（参加用のURLは、お申し込み後にお送りします）</dd>
+    <dt>参加費</dt>
+    <dd>無料</dd>
+  </dl>
+  <form class="apply js-form" action="https://formspree.io/f/mbdebeel" method="POST" data-done="受け付けました。参加用のURLを、開催日の前日までにメールでお送りします。" style="margin-top:24px">
+    <input type="hidden" name="_subject" value="【赤鬼起業レジデンス】オンライン相談会の申込">
+    <input type="hidden" name="種別" value="赤鬼起業レジデンス オンライン相談会">
+    <label>お名前<span class="req">必須</span><input type="text" name="name" autocomplete="name" required></label>
+    <label>メールアドレス<span class="req">必須</span><input type="email" name="email" autocomplete="email" required></label>
+    <label>参加する日<span class="req">必須</span>
+      <select name="参加日" required>
+        <option value="">選んでください</option>
+        <option>10月28日（水）20:00〜</option>
+        <option>11月13日（金）20:00〜</option>
+      </select>
+    </label>
+    <label>聞いてみたいこと<span class="opt">任意</span><textarea name="message" rows="3"></textarea></label>
+    <button type="submit" class="btn">相談会に申し込む</button>
+    <p class="status" role="status" aria-live="polite"></p>
+  </form>
+</section>
+
 <section class="host">
   <h2>伴走する人</h2>
   <p class="host-name">古谷 如弘<span>労働者協同組合赤鬼社 代表理事</span></p>
@@ -332,7 +360,7 @@ footer .org{color:var(--ink-2)}
   <div class="cta">
     <h2>参加を申し込む</h2>
     <p>下のフォームからお申し込みください。お申し込みいただいた方には、視察する空き家2軒の詳しい情報をお送りします。そのうえで内容を拝見して選考し、結果をメールでご連絡します。</p>
-    <form id="apply" class="apply" action="https://formspree.io/f/mbdebeel" method="POST">
+    <form id="apply" class="apply js-form" action="https://formspree.io/f/mbdebeel" method="POST" data-done="お申し込みを受け付けました。視察する空き家の詳しい情報を、メールでお送りします。">
       <input type="hidden" name="_subject" value="【赤鬼起業レジデンス】参加申込">
       <input type="hidden" name="種別" value="赤鬼起業レジデンス 参加申込">
       <label>お名前<span class="req">必須</span><input type="text" name="name" autocomplete="name" required></label>
@@ -369,7 +397,7 @@ footer .org{color:var(--ink-2)}
       <label>このプログラムで考えてみたいこと<span class="req">必須</span><textarea name="message" rows="5" required placeholder="やってみたいこと、気になっていること、鬼石に来てみたい理由など。まだ形になっていなくても大丈夫です"></textarea></label>
       <p class="privacy">いただいた情報は、選考とこのプログラムのご連絡にのみ使います。</p>
       <button type="submit" class="btn">参加を申し込む</button>
-      <p id="apply-status" class="status" role="status" aria-live="polite"></p>
+      <p class="status" role="status" aria-live="polite"></p>
     </form>
     <p class="alt">フォームがうまく送れない場合は、<a href="mailto:furuya@akaonisya.jp?subject=%E8%B5%A4%E9%AC%BC%E8%B5%B7%E6%A5%AD%E3%83%AC%E3%82%B8%E3%83%87%E3%83%B3%E3%82%B9%E3%81%AE%E5%8F%82%E5%8A%A0%E7%94%B3%E8%BE%BC">furuya@akaonisya.jp</a> 宛にご連絡ください。申し込む前に話を聞いてみたい方も、メールかお電話（<a href="tel:08039322241">080-3932-2241</a>）でお気軽にどうぞ。</p>
     <p class="deadline">締切は11月20日（金）。お申し込みは届いた順に選考し、お申し込みから3日以内を目安に結果をご連絡します。定員に達した時点で受付を終了します。</p>
@@ -392,19 +420,22 @@ footer .org{color:var(--ink-2)}
 </div>
 <script>
 (function(){
-  var f=document.getElementById('apply'); if(!f) return;
-  var st=document.getElementById('apply-status');
-  f.addEventListener('submit',function(e){
-    if(!window.fetch) return;
-    e.preventDefault();
-    var b=f.querySelector('button'); b.disabled=true; st.textContent='送信しています…';
-    fetch(f.action,{method:'POST',body:new FormData(f),headers:{'Accept':'application/json'}})
-      .then(function(r){
-        if(r.ok){f.reset();st.textContent='お申し込みを受け付けました。視察する空き家の詳しい情報を、メールでお送りします。';}
-        else{st.textContent='送信できませんでした。お手数ですが、下のメールアドレスかお電話でご連絡ください。';}
-      })
-      .catch(function(){st.textContent='送信できませんでした。お手数ですが、下のメールアドレスかお電話でご連絡ください。';})
-      .then(function(){b.disabled=false;});
+  var forms=document.querySelectorAll('form.js-form');
+  var fail='送信できませんでした。お手数ですが、メールかお電話でご連絡ください。';
+  Array.prototype.forEach.call(forms,function(f){
+    var st=f.querySelector('.status');
+    f.addEventListener('submit',function(e){
+      if(!window.fetch) return;
+      e.preventDefault();
+      var b=f.querySelector('button'); b.disabled=true; st.textContent='送信しています…';
+      fetch(f.action,{method:'POST',body:new FormData(f),headers:{'Accept':'application/json'}})
+        .then(function(r){
+          if(r.ok){f.reset();st.textContent=f.getAttribute('data-done');}
+          else{st.textContent=fail;}
+        })
+        .catch(function(){st.textContent=fail;})
+        .then(function(){b.disabled=false;});
+    });
   });
 })();
 </script>
