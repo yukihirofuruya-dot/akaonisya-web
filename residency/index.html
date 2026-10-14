@@ -216,7 +216,7 @@ footer .org{color:var(--ink-2)}
   <p>鬼石（おにし）は、群馬県藤岡市の山あいにある小さな町です。東京からは車で2時間ほどです。</p>
   <p>町には、官民協働で取り組む空き家バンク制度「おにしんち」があり、30軒ほどの空き家が登録されています。今回は、その中から事業用に選んだ2軒を使います。1軒は3日間の拠点になる赤鬼ハウス、もう1軒は実際に見に行く家です。</p>
   <p>どちらかの家で、自分の事業が成り立つかを考えてもらいます。最後に、その計画を地域の人たちの前で発表して、意見をもらいます。</p>
-  <p>2軒の詳しい情報は、個別相談のときにお渡しします。</p>
+  <p>視察する空き家2軒の詳しい情報（間取りや建物の状態など）は、お申し込みいただいた方にお送りします。</p>
   <figure class="photo"><img src="img/living.jpg" alt="赤鬼ハウスの1階リビング。杉の床、革のソファ、丸い照明、庭に面した大きな窓" loading="lazy" width="1600" height="1066"><figcaption>拠点になる赤鬼ハウス。1階のリビング</figcaption></figure>
   <p class="note">主催する労働者協同組合赤鬼社は、この町で空き家を買い取ってシェアハウス「<a href="/house/">赤鬼ハウス</a>」として再生し、地域の祭りの運営にも関わっています。3日間の拠点も、DIYの現場も、その赤鬼ハウスです。</p>
   <figure class="photo" style="margin-top:20px;"><div class="pair"><img src="img/diy-grinder.jpg" alt="2階のバルコニーで、錆びた手すりをグラインダーで磨く人" loading="lazy"><img src="img/diy-balcony.jpg" alt="塗り直したオレンジの手すりのバルコニーで作業する人たち" loading="lazy"></div><figcaption>錆びた手すりを磨き、塗り直したときの様子</figcaption></figure>
@@ -291,7 +291,7 @@ footer .org{color:var(--ink-2)}
     <dt>費用の目安</dt>
     <dd>参加費と宿泊費で35,000円<br>食費は1食1,000円程度（3日間で6食、約6,000円）<br>このほか、神保原駅までの交通費がかかります</dd>
     <dt>お申込み</dt>
-    <dd>まず個別に30分ほどお話しさせてください。そのうえでお申し込みいただきます</dd>
+    <dd>下のフォームからお申し込みください。いただいた内容をもとに選考し、参加が決まった方にお支払い方法と当日のご案内をお送りします<br>締切は11月20日（金）です</dd>
     <dt>主催</dt>
     <dd>労働者協同組合赤鬼社<br>運営協力：藤岡市鬼石総合支所／鬼石コミンカコナイカ</dd>
     <dt>備考</dt>
@@ -310,6 +310,8 @@ footer .org{color:var(--ink-2)}
     <dd>大丈夫です。家と町を実際に見て、人の話を聞きながら、3日間で一緒に考えていきます。</dd>
     <dt>一人で参加しても大丈夫ですか</dt>
     <dd>はい。一人での参加を前提にしています。</dd>
+    <dt>選考はありますか</dt>
+    <dd>はい。定員が6名のため、お申し込みの内容を拝見して参加いただく方を決めます。今回参加いただけなかった方には、2027年1月の第2回をご案内します。</dd>
     <dt>キャンセルした場合はどうなりますか</dt>
     <dd>参加費は、11月22日（日）までのキャンセルなら全額お返しします。11月23日〜25日は半額、前日と当日のキャンセル、連絡のない不参加は全額をいただきます。主催者の都合で中止する場合は全額お返しします。宿泊費の扱いは、各宿の規定に従います。</dd>
   </dl>
@@ -328,16 +330,31 @@ footer .org{color:var(--ink-2)}
 
 <section>
   <div class="cta">
-    <h2>まず話してみる</h2>
-    <p>プログラムの中身や、いまお持ちの構想について、オンラインで30分ほどお話しします。参加を決めていなくても構いません。下のフォームからお申し込みいただければ、こちらから日程の候補をお送りします。</p>
+    <h2>参加を申し込む</h2>
+    <p>下のフォームからお申し込みください。お申し込みいただいた方には、視察する空き家2軒の詳しい情報をお送りします。そのうえで内容を拝見して選考し、結果をメールでご連絡します。</p>
     <form id="apply" class="apply" action="https://formspree.io/f/mbdebeel" method="POST">
-      <input type="hidden" name="_subject" value="【赤鬼起業レジデンス】個別相談の申込">
-      <input type="hidden" name="種別" value="赤鬼起業レジデンス 個別相談">
+      <input type="hidden" name="_subject" value="【赤鬼起業レジデンス】参加申込">
+      <input type="hidden" name="種別" value="赤鬼起業レジデンス 参加申込">
       <label>お名前<span class="req">必須</span><input type="text" name="name" autocomplete="name" required></label>
       <label>メールアドレス<span class="req">必須</span><input type="email" name="email" autocomplete="email" required></label>
-      <label>電話番号<span class="opt">任意</span><input type="tel" name="電話番号" autocomplete="tel"></label>
-      <label>お住まいの地域<span class="opt">任意</span><input type="text" name="お住まいの地域" placeholder="例：東京都世田谷区"></label>
-      <label>相談の希望日時<span class="req">必須</span><textarea name="希望日時" rows="3" required placeholder="例：平日20時以降、土曜の午前など。いくつか書いていただければ、こちらから候補をお送りします"></textarea></label>
+      <label>電話番号<span class="req">必須</span><input type="tel" name="電話番号" autocomplete="tel" required></label>
+      <label>お住まいの地域<span class="req">必須</span><input type="text" name="お住まいの地域" required placeholder="例：東京都世田谷区"></label>
+      <label>ご職業・お仕事の内容<span class="opt">任意</span><input type="text" name="職業" placeholder="例：メーカー勤務（企画職）、個人事業主（デザイン）など"></label>
+      <label>宿泊の希望<span class="req">必須</span>
+        <select name="宿泊" required>
+          <option value="">選んでください</option>
+          <option>2泊（11/27・28）</option>
+          <option>1泊のみ</option>
+          <option>宿泊は不要</option>
+        </select>
+      </label>
+      <label>神保原駅からの送迎<span class="req">必須</span>
+        <select name="送迎" required>
+          <option value="">選んでください</option>
+          <option>希望する</option>
+          <option>自分の車で行く</option>
+        </select>
+      </label>
       <label>このプログラムを知ったきっかけ<span class="opt">任意</span>
         <select name="きっかけ">
           <option value="">選んでください</option>
@@ -349,13 +366,13 @@ footer .org{color:var(--ink-2)}
           <option>その他</option>
         </select>
       </label>
-      <label>いま考えていること、聞いてみたいこと<span class="opt">任意</span><textarea name="message" rows="4" placeholder="まだ何も決まっていなくても大丈夫です"></textarea></label>
-      <p class="privacy">いただいた情報は、個別相談とこのプログラムのご連絡にのみ使います。</p>
-      <button type="submit" class="btn">個別相談を申し込む</button>
+      <label>このプログラムで考えてみたいこと<span class="req">必須</span><textarea name="message" rows="5" required placeholder="やってみたいこと、気になっていること、鬼石に来てみたい理由など。まだ形になっていなくても大丈夫です"></textarea></label>
+      <p class="privacy">いただいた情報は、選考とこのプログラムのご連絡にのみ使います。</p>
+      <button type="submit" class="btn">参加を申し込む</button>
       <p id="apply-status" class="status" role="status" aria-live="polite"></p>
     </form>
-    <p class="alt">フォームがうまく送れない場合は、<a href="mailto:furuya@akaonisya.jp?subject=%E8%B5%A4%E9%AC%BC%E8%B5%B7%E6%A5%AD%E3%83%AC%E3%82%B8%E3%83%87%E3%83%B3%E3%82%B9%E3%81%AE%E5%80%8B%E5%88%A5%E7%9B%B8%E8%AB%87%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6">furuya@akaonisya.jp</a> 宛に「個別相談希望」とだけ送ってください。お電話（<a href="tel:08039322241">080-3932-2241</a>）でも受け付けます。</p>
-    <p class="deadline">個別相談の受付は11月20日（金）まで。定員に達し次第、締め切ります。</p>
+    <p class="alt">フォームがうまく送れない場合は、<a href="mailto:furuya@akaonisya.jp?subject=%E8%B5%A4%E9%AC%BC%E8%B5%B7%E6%A5%AD%E3%83%AC%E3%82%B8%E3%83%87%E3%83%B3%E3%82%B9%E3%81%AE%E5%8F%82%E5%8A%A0%E7%94%B3%E8%BE%BC">furuya@akaonisya.jp</a> 宛にご連絡ください。申し込む前に話を聞いてみたい方も、メールかお電話（<a href="tel:08039322241">080-3932-2241</a>）でお気軽にどうぞ。</p>
+    <p class="deadline">締切は11月20日（金）。お申し込みは届いた順に選考し、お申し込みから3日以内を目安に結果をご連絡します。定員に達した時点で受付を終了します。</p>
   </div>
 </section>
 
@@ -383,7 +400,7 @@ footer .org{color:var(--ink-2)}
     var b=f.querySelector('button'); b.disabled=true; st.textContent='送信しています…';
     fetch(f.action,{method:'POST',body:new FormData(f),headers:{'Accept':'application/json'}})
       .then(function(r){
-        if(r.ok){f.reset();st.textContent='受け付けました。こちらから日程の候補をメールでお送りします。';}
+        if(r.ok){f.reset();st.textContent='お申し込みを受け付けました。視察する空き家の詳しい情報を、メールでお送りします。';}
         else{st.textContent='送信できませんでした。お手数ですが、下のメールアドレスかお電話でご連絡ください。';}
       })
       .catch(function(){st.textContent='送信できませんでした。お手数ですが、下のメールアドレスかお電話でご連絡ください。';})
