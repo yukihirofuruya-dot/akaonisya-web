@@ -165,6 +165,16 @@ dl.faq dd{margin:0 0 4px;font-size:15px;color:var(--ink-2);line-height:1.85;padd
 .apply button.btn{border:0;cursor:pointer;align-self:flex-start;font-family:inherit}
 .apply button.btn[disabled]{opacity:.6;cursor:default}
 .status{font-size:14.5px;margin:0;min-height:1em;color:var(--stone)}
+.fab{
+  position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:50;
+  background:var(--oni);color:#fff;text-decoration:none;font-size:15px;font-weight:500;letter-spacing:.04em;
+  padding:14px 22px;border-radius:999px;box-shadow:0 6px 18px rgba(0,0,0,.22);
+  transition:opacity .25s,transform .25s}
+.fab:focus-visible{outline:3px solid var(--stone);outline-offset:3px}
+.fab.is-hidden{opacity:0;transform:translateY(12px);pointer-events:none}
+html{scroll-behavior:smooth}
+#apply-area{scroll-margin-top:16px}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}.fab{transition:none}}
 .hero{max-width:960px;margin:0 auto}
 .hero img{width:100%;height:auto;display:block}
 figure.photo{margin:0 0 28px}
@@ -356,7 +366,7 @@ footer .org{color:var(--ink-2)}
   </ul>
 </section>
 
-<section>
+<section id="apply-area">
   <div class="cta">
     <h2>参加を申し込む</h2>
     <p>下のフォームからお申し込みください。お申し込みいただいた方には、視察する空き家2軒の詳しい情報をお送りします。そのうえで内容を拝見して選考し、結果をメールでご連絡します。</p>
@@ -438,6 +448,16 @@ footer .org{color:var(--ink-2)}
         .then(function(){b.disabled=false;});
     });
   });
+})();
+</script>
+<a class="fab" href="#apply-area" aria-label="参加の申込フォームへ移動">参加を申し込む</a>
+<script>
+(function(){
+  var fab=document.querySelector('.fab'), target=document.getElementById('apply-area');
+  if(!fab||!target||!('IntersectionObserver' in window)) return;
+  new IntersectionObserver(function(es){
+    es.forEach(function(e){ fab.classList.toggle('is-hidden', e.isIntersecting); });
+  },{threshold:0}).observe(target);
 })();
 </script>
 </body>
