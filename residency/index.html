@@ -440,6 +440,13 @@ footer .org{color:var(--ink-2)}
 <script>
 (function(){
   var AUTOREPLY_URL='https://script.google.com/macros/s/AKfycbw9PfaHq4dwloS_SRcU56r6Wm6OxHnDXA9kZyNFQvm6_WBGGbWlTCHcjdvavw1OnRNq/exec'; // Google Apps Script の公開URL
+  var PIXEL_ID=''; // Meta Pixel のID（広告アカウント作成後にここへ。空のままなら何も読み込まない）
+  var SRC='';
+  try{ var q=new URLSearchParams(location.search); var u=[q.get('utm_source'),q.get('utm_medium'),q.get('utm_campaign')].filter(Boolean).join(' / '); SRC=u; }catch(_){}
+  if(PIXEL_ID){
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init',PIXEL_ID); fbq('track','PageView');
+  }
   var forms=document.querySelectorAll('form.js-form');
   var fail='送信できませんでした。お手数ですが、メールかお電話でご連絡ください。';
   Array.prototype.forEach.call(forms,function(f){
@@ -449,10 +456,11 @@ footer .org{color:var(--ink-2)}
       e.preventDefault();
       var b=f.querySelector('button'); b.disabled=true; st.textContent='送信しています…';
       var fd=new FormData(f);
+      if(SRC) fd.append('流入元',SRC);
       if(AUTOREPLY_URL){ try{ fetch(AUTOREPLY_URL,{method:'POST',mode:'no-cors',body:new URLSearchParams(fd)}); }catch(_){} }
       fetch(f.action,{method:'POST',body:fd,headers:{'Accept':'application/json'}})
         .then(function(r){
-          if(r.ok){f.reset();st.textContent=f.getAttribute('data-done');}
+          if(r.ok){if(window.fbq){fbq('track',f.id==='apply'?'SubmitApplication':'Lead');}f.reset();st.textContent=f.getAttribute('data-done');}
           else{st.textContent=fail;}
         })
         .catch(function(){st.textContent=fail;})
