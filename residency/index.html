@@ -173,7 +173,7 @@ dl.faq dd{margin:0 0 4px;font-size:15px;color:var(--ink-2);line-height:1.85;padd
 .fab:focus-visible{outline:3px solid var(--stone);outline-offset:3px}
 .fab.is-hidden{opacity:0;transform:translateY(12px);pointer-events:none}
 html{scroll-behavior:smooth}
-#apply-area{scroll-margin-top:16px}
+#apply-area,#info,#session{scroll-margin-top:16px}
 @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}.fab{transition:none}}
 .host-head{display:grid;grid-template-columns:120px 1fr;gap:18px;align-items:end;margin:0 0 14px}
 .host-head img{width:120px;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:2px;display:block}
@@ -224,7 +224,7 @@ footer .org{color:var(--ink-2)}
     <span>定員 <b>6名</b></span>
     <span>参加費 <b>25,000円</b></span>
   </div>
-  <a class="session-link" href="#session"><span><b>まずは無料のオンライン相談会へ</b><small>10月28日（水）・11月13日（金）21:00〜<br>顔出し不要。話を聞くだけでも歓迎です</small></span><span class="arr" aria-hidden="true">↓</span></a>
+  <a class="session-link" href="#info"><span><b>まずは詳しい資料を受け取る（無料）</b><small>視察する空き家2軒の写真と建物の概要、<br>オンライン相談会のご案内をメールでお送りします</small></span><span class="arr" aria-hidden="true">↓</span></a>
 </header>
 
 <section>
@@ -234,11 +234,27 @@ footer .org{color:var(--ink-2)}
   <p>鬼石（おにし）は、群馬県藤岡市の山あいにある小さな町です。東京からは車で2時間ほどです。</p>
   <p>町には、官民協働で取り組む空き家バンク制度「おにしんち」があり、30軒ほどの空き家が登録されています。今回は、その中から事業用に選んだ2軒を使います。1軒は3日間の拠点になる赤鬼ハウス、もう1軒は実際に見に行く家です。</p>
   <p>どちらかの家で、自分の事業が成り立つかを考えてもらいます。最後に、その計画を地域の人たちの前で発表して、意見をもらいます。</p>
-  <p>視察する空き家2軒の詳しい情報（間取りや建物の状態など）は、お申し込みいただいた方にお送りします。</p>
+  <p>視察する空き家2軒の詳しい情報（写真や建物の概要、いまの状態など）は、<a href="#info">資料をご請求いただいた方</a>にお送りします。</p>
   <figure class="photo"><img src="img/living.jpg" alt="赤鬼ハウスの1階リビング。杉の床、革のソファ、丸い照明、庭に面した大きな窓" loading="lazy" width="1600" height="1066"><figcaption>拠点になる赤鬼ハウス。1階のリビング</figcaption></figure>
   <p class="note">主催する労働者協同組合赤鬼社は、この町で空き家を買い取ってシェアハウス「<a href="/house/">赤鬼ハウス</a>」として再生し、地域の祭りの運営にも関わっています。3日間の拠点も、DIYの現場も、その赤鬼ハウスです。</p>
   <figure class="photo" style="margin-top:20px;"><div class="pair"><img src="img/diy-grinder.jpg" alt="2階のバルコニーで、錆びた手すりをグラインダーで磨く人" loading="lazy"><img src="img/diy-balcony.jpg" alt="塗り直したオレンジの手すりのバルコニーで作業する人たち" loading="lazy"></div><figcaption>錆びた手すりを磨き、塗り直したときの様子</figcaption></figure>
   <figure class="photo video"><div class="video-frame"><iframe src="https://player.vimeo.com/video/1234291230?dnt=1" title="赤鬼ハウスのDIYの記録" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe></div><figcaption>赤鬼ハウスのDIYの記録（約3分）</figcaption></figure>
+</section>
+
+<section id="info">
+  <h2>詳しい資料を受け取る</h2>
+  <p>視察する空き家2軒の写真と、建物の概要や状態をまとめた資料を、メールでお送りします。あわせて、オンライン相談会のご案内もお届けします。申し込むかどうかは、資料を見てから決めてください。</p>
+  <form class="apply js-form" action="https://formspree.io/f/mbdebeel" method="POST" data-done="ありがとうございます。資料のご案内をメールでお送りしました。届かない場合は、迷惑メールのフォルダもご確認ください。" style="margin-top:20px">
+    <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px">
+    <input type="hidden" name="_subject" value="【赤鬼起業レジデンス】資料請求">
+    <input type="hidden" name="種別" value="赤鬼起業レジデンス 資料請求">
+    <label>お名前<span class="req">必須</span><input type="text" name="name" autocomplete="name" required></label>
+    <label>メールアドレス<span class="req">必須</span><input type="email" name="email" autocomplete="email" required></label>
+    <label>気になっていること<span class="opt">任意</span><textarea name="message" rows="2"></textarea></label>
+    <button type="submit" class="btn">資料を受け取る</button>
+    <p class="status" role="status" aria-live="polite"></p>
+    <p class="privacy">いただいたメールアドレスには、資料のほか、相談会や募集締切のご案内を、2026年11月20日までにお送りします。不要な場合は、届いたメールに返信してお知らせください。</p>
+  </form>
 </section>
 
 <section>
@@ -385,7 +401,7 @@ footer .org{color:var(--ink-2)}
 <section id="apply-area">
   <div class="cta">
     <h2>参加を申し込む</h2>
-    <p>下のフォームからお申し込みください。お申し込みいただいた方には、視察する空き家2軒の詳しい情報をお送りします。そのうえで内容を拝見して選考し、結果をメールでご連絡します。</p>
+    <p>下のフォームからお申し込みください。内容を拝見して選考し、結果をメールでご連絡します。視察する空き家2軒の詳しい情報も、あわせてお送りします。</p>
     <form id="apply" class="apply js-form" action="https://formspree.io/f/mbdebeel" method="POST" data-done="お申し込みを受け付けました。視察する空き家の詳しい情報を、メールでお送りしました。届かない場合は、迷惑メールのフォルダもご確認ください。">
       <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px">
     <input type="hidden" name="_subject" value="【赤鬼起業レジデンス】参加申込">
@@ -470,7 +486,7 @@ footer .org{color:var(--ink-2)}
       if(AUTOREPLY_URL){ try{ fetch(AUTOREPLY_URL,{method:'POST',mode:'no-cors',body:new URLSearchParams(fd)}); }catch(_){} }
       fetch(f.action,{method:'POST',body:fd,headers:{'Accept':'application/json'}})
         .then(function(r){
-          if(r.ok){if(window.fbq){fbq('track',f.id==='apply'?'SubmitApplication':'Lead');}f.reset();st.textContent=f.getAttribute('data-done');}
+          if(r.ok){if(window.fbq){var t=f.querySelector('[name="種別"]'),k=t?t.value:'';fbq('track',k.indexOf('参加申込')>-1?'SubmitApplication':(k.indexOf('相談会')>-1?'Schedule':'Lead'));}f.reset();st.textContent=f.getAttribute('data-done');}
           else{st.textContent=fail;}
         })
         .catch(function(){st.textContent=fail;})
@@ -479,14 +495,17 @@ footer .org{color:var(--ink-2)}
   });
 })();
 </script>
-<a class="fab" href="#apply-area" aria-label="参加の申込フォームへ移動">参加を申し込む</a>
+<a class="fab" href="#info" aria-label="資料請求のフォームへ移動">資料を受け取る</a>
 <script>
 (function(){
-  var fab=document.querySelector('.fab'), target=document.getElementById('apply-area');
-  if(!fab||!target||!('IntersectionObserver' in window)) return;
-  new IntersectionObserver(function(es){
-    es.forEach(function(e){ fab.classList.toggle('is-hidden', e.isIntersecting); });
-  },{threshold:0}).observe(target);
+  var fab=document.querySelector('.fab');
+  var ids=['info','session','apply-area'], seen={};
+  if(!fab||!('IntersectionObserver' in window)) return;
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){ seen[e.target.id]=e.isIntersecting; });
+    fab.classList.toggle('is-hidden', ids.some(function(k){return seen[k];}));
+  },{threshold:0});
+  ids.forEach(function(k){ var el=document.getElementById(k); if(el) io.observe(el); });
 })();
 </script>
 </body>
