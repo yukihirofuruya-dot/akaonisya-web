@@ -233,6 +233,14 @@
     color: var(--muted);
     margin-top: 0.3rem;
   }
+  .card-voice {
+    font-size: 0.8rem;
+    line-height: 1.7;
+    color: #ccc;
+    margin-top: 0.75rem;
+    padding-left: 0.75rem;
+    border-left: 2px solid var(--accent);
+  }
 
   .card.playing .play-overlay { display: none; }
 
@@ -398,6 +406,7 @@
       client: 'せいざん株式会社',
       vimeoId: '270911079',
       hash: null,
+      voice: 'ご担当者さまから「問い合わせが8倍になった」とのお声をいただきました。',
     },
     {
       id: 'casy',
@@ -787,6 +796,7 @@
           <div class="card-category">${work.categoryLabel}</div>
           <div class="card-title">${work.title}</div>
           <div class="card-client">${work.client}</div>
+          ${work.voice ? `<div class="card-voice">${work.voice}</div>` : ''}
         </div>
       `;
       grid.appendChild(card);
