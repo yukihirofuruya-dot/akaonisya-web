@@ -468,7 +468,7 @@ footer .org{color:var(--ink-2)}
   var AUTOREPLY_URL='https://script.google.com/macros/s/AKfycbw9PfaHq4dwloS_SRcU56r6Wm6OxHnDXA9kZyNFQvm6_WBGGbWlTCHcjdvavw1OnRNq/exec'; // Google Apps Script の公開URL
   var PIXEL_ID='455938781422025'; // Meta Pixel のID（広告アカウント作成後にここへ。空のままなら何も読み込まない）
   var SRC='';
-  try{ var q=new URLSearchParams(location.search); var u=[q.get('utm_source'),q.get('utm_medium'),q.get('utm_campaign')].filter(Boolean).join(' / '); SRC=u; }catch(_){}
+  try{ var q=new URLSearchParams(location.search); var u=[q.get('utm_source'),q.get('utm_medium'),q.get('utm_campaign'),q.get('utm_content')].filter(Boolean).join(' / '); if(!u&&document.referrer){ try{ var h=new URL(document.referrer).hostname; if(h&&h!==location.hostname) u='参照元: '+h; }catch(_){} } SRC=u; }catch(_){}
   if(PIXEL_ID){
     !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
     fbq('init',PIXEL_ID); fbq('track','PageView');
