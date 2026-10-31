@@ -53,6 +53,7 @@
   .hero-left { display: flex; flex-direction: column; justify-content: center; padding: 80px 64px 80px 80px; position: relative; z-index: 2; background: var(--white); }
   .hero-tag { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.2em; color: var(--red); text-transform: uppercase; margin-bottom: 28px; display: flex; align-items: center; gap: 12px; }
   .hero-tag::before { content: ''; display: block; width: 32px; height: 1px; background: var(--red); }
+  .hero-logo { display: block; width: 300px; max-width: 100%; height: auto; margin-bottom: 24px; }
   .hero-h1 { font-family: 'Shippori Mincho', serif; font-size: clamp(40px, 4.5vw, 64px); line-height: 1.4; font-weight: 700; color: var(--black); margin-bottom: 20px; letter-spacing: 0.04em; }
   .hero-h1 em { font-style: normal; color: var(--red-dark); }
   .hero-sub { font-family: 'DM Serif Display', serif; font-size: 16px; color: var(--earth-light); letter-spacing: 0.12em; margin-bottom: 32px; font-style: italic; }
@@ -292,6 +293,9 @@
     .hero-left {
       padding: 48px 24px 40px;
     }
+    .hero-logo { width: 168px; margin: 0 auto 20px; }
+    .hero-tag { justify-content: center; white-space: nowrap; font-size: 10px; letter-spacing: 0.1em; gap: 8px; margin-bottom: 24px; }
+    .hero-tag::before, .hero-tag::after { content: ''; display: block; width: 16px; height: 1px; background: var(--red); flex: none; }
     .hero-right {
       height: 52vw;
       min-height: 220px;
@@ -401,7 +405,7 @@
 <!-- HERO -->
 <section class="hero">
   <div class="hero-left">
-    <img src="img/top-02.png" alt="赤鬼社" width="783" height="711" style="display:block; width:300px; max-width:100%; height:auto; margin-bottom:24px;">
+    <img class="hero-logo" src="img/top-02.png" alt="赤鬼社" width="783" height="711">
     <div class="hero-tag">Workers' Cooperative · Onishi, Gunma</div>
     <h1 class="hero-h1">
       鬼石を、<br>
