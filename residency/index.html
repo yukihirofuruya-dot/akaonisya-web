@@ -180,12 +180,15 @@ html{scroll-behavior:smooth}
 .host-head .host-name{margin:0}
 .hero{max-width:960px;margin:0 auto}
 .hero img{width:100%;height:auto;display:block}
-.hero.split{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:3px;background:var(--paper)}
-.hero.split figure{margin:0;position:relative;min-width:0;aspect-ratio:3/4;overflow:hidden}
+.hero.split{display:grid;grid-template-columns:2fr 1fr;grid-template-rows:1fr 1fr;gap:3px;background:var(--paper);aspect-ratio:16/9}
+.hero.split figure{margin:0;position:relative;min-width:0;min-height:0;overflow:hidden}
+.hero.split figure:first-child{grid-row:1/3}
 .hero.split img{width:100%;height:100%;object-fit:cover}
-.hero.split figcaption{position:absolute;left:0;right:0;bottom:0;padding:34px 12px 11px;color:#fff;font-size:13px;line-height:1.5;letter-spacing:.04em;background:linear-gradient(to top,rgba(10,14,12,.72),rgba(10,14,12,0))}
-.hero.split figcaption b{display:block;font-weight:500;font-size:14px}
-@media (max-width:560px){.hero.split figcaption{font-size:11px;padding:28px 8px 8px}.hero.split figcaption b{font-size:12px}}
+@media (max-width:560px){
+.hero.split{grid-template-columns:1fr 1fr;grid-template-rows:auto auto;aspect-ratio:auto}
+.hero.split figure:first-child{grid-row:auto;grid-column:1/3;aspect-ratio:4/3}
+.hero.split figure:not(:first-child){aspect-ratio:1/1}
+}
 figure.photo{margin:0 0 28px}
 figure.photo img{width:100%;height:auto;display:block;border-radius:2px}
 .pair{display:grid;grid-template-columns:1fr 1fr;gap:8px}
@@ -218,9 +221,9 @@ footer .org{color:var(--ink-2)}
 <body>
 
 <div class="hero split">
-  <figure><img src="img/exterior.jpg" alt="赤鬼ハウスの外観。瓦屋根の木造二階建てと、2階のベランダ、前庭の木" width="1600" height="1067" style="object-position:30% 50%"><figcaption><b>赤鬼ハウス</b>2日間の拠点</figcaption></figure>
-  <figure><img src="img/hall.jpg" alt="元ドライブインの2階ホール。タイル張りの床、ミラーボール、カラオケ用のステージ" width="1000" height="1333" style="object-position:50% 30%"><figcaption><b>元ドライブイン</b>視察する空き家</figcaption></figure>
-  <figure><img src="img/diy-wall.jpg" alt="赤鬼ハウスの一室で、白い壁を塗る作業の合間にポーズをとる4人" width="1600" height="1066" style="object-position:30% 30%"><figcaption><b>DIY</b>空き家を直す</figcaption></figure>
+  <figure><img src="img/exterior.jpg" alt="赤鬼ハウスの外観。瓦屋根の木造二階建てと、2階のベランダ、前庭の木" width="1600" height="1067" style="object-position:40% 55%"></figure>
+  <figure><img src="img/hall.jpg" alt="元ドライブインの2階ホール。タイル張りの床、ミラーボール、カラオケ用のステージ" width="1000" height="1333" style="object-position:50% 30%"></figure>
+  <figure><img src="img/diy-wall.jpg" alt="赤鬼ハウスの一室で、白い壁を塗る作業の合間にポーズをとる4人" width="1600" height="1066" style="object-position:40% 30%"></figure>
 </div>
 
 <div class="wrap">
